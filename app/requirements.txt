@@ -9,3 +9,4 @@ celery[redis]
 redis
 requests
 whitenoise
+django-webpack-loader

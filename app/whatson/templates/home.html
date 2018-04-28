@@ -1,7 +1,12 @@
 {% extends '_base.html' %}
+{% load render_bundle from webpack_loader %}
 
 {% block title %}Hello World{% endblock %}
 
 {% block content %}
-Hello world!
+<div id="app"></div>
+{% endblock %}
+
+{% block extra_js %}
+	{% render_bundle 'main' 'js' %}
 {% endblock %}

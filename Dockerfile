@@ -36,7 +36,7 @@ RUN \
 ADD app /app
 
 # Run frontend build
-# RUN npm run prod
+RUN npm run prod
 
 ARG DJANGO_SETTINGS_MODULE=whatson.settings.prod
 ARG DJANGO_SECRET_KEY=not-a-secret

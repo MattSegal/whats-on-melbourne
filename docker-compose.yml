@@ -37,10 +37,12 @@ services:
             - 8000:8000
         volumes:
           - ./app:/app
+          - build:/app/build
         links:
             - database
             - redis
             - worker
+            - webpack
         environment:
             PGDATABASE: postgres
             PGUSER: postgres
@@ -50,6 +52,17 @@ services:
             CELERY_HOST: redis
             REDIS_HOST: redis
             DJANGO_SETTINGS_MODULE: whatson.settings.dev
+    webpack:
+        command: npm run dev
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./app:/app
+            - node_modules:/app/node_modules
+            - build:/app/build
 
 volumes:
     postgres-data:
+    node_modules:
+    build:
