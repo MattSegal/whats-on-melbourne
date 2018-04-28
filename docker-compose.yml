@@ -38,6 +38,7 @@ services:
         volumes:
           - ./app:/app
           - build:/app/build
+          - node_modules:/app/node_modules
         links:
             - database
             - redis

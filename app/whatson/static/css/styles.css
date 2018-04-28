@@ -1,0 +1,29 @@
+header {
+    height: 44px;
+    background-color: #eee;
+    padding: 10px 0;
+}
+
+header h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+#app {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.map-wrapper {
+  height: 100%;
+}
+
+.venue-overlay h1 {
+  color: #f00;
+  font-size: 1.1rem;
+  font-weight: normal;
+}
