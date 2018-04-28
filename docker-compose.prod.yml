@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+    redis:
+        image: redis
+    worker:
+        image: localhost:5000/whatson
+        entrypoint: /app/start-worker.sh
+        environment:
+            - DJANGO_SETTINGS_MODULE=whatson.settings.prod
+            - CELERY_HOST=redis
+            - REDIS_HOST=redis
+            # Postgres
+            - PGDATABASE=whatson
+            - PGUSER=$WHATSON_DB_USER
+            - PGPASSWORD=$WHATSON_DB_PASSWORD
+            - PGHOST=$DOCKERHOST
+            - PGPORT=5432
+            - RAVEN_DSN=$WHATSON_RAVEN_DSN
+            # Pass-through
+            - DJANGO_SECRET_KEY
+
+    web:
+        image: localhost:5000/whatson
+        entrypoint: /app/start-web.sh
+        ports:
+            - 9000:9000
+        environment:
+            - DJANGO_SETTINGS_MODULE=whatson.settings.prod
+            - CELERY_HOST=redis
+            - REDIS_HOST=redis
+            # Postgres
+            - PGDATABASE=whatson
+            - PGUSER=$WHATSON_DB_USER
+            - PGPASSWORD=$WHATSON_DB_PASSWORD
+            - PGHOST=$DOCKERHOST
+            - PGPORT=5432
+            - RAVEN_DSN=$WHATSON_RAVEN_DSN
+            # Pass-through
+            - DJANGO_SECRET_KEY
+

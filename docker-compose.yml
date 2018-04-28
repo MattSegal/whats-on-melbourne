@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+    database:
+        image: postgres
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+    redis:
+        image: redis
+    worker:
+        image: localhost:5000/whatson
+        entrypoint: /app/start-worker.sh
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./app:/app
+        links:
+            - database
+            - redis
+        environment:
+            PGDATABASE: postgres
+            PGUSER: postgres
+            PGPASSWORD: password
+            PGHOST: database
+            PGPORT: 5432
+            CELERY_HOST: redis
+            REDIS_HOST: redis
+            DJANGO_SETTINGS_MODULE: whatson.settings.dev
+    web:
+        image: localhost:5000/whatson
+        command: ./manage.py runserver 0.0.0.0:8000
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - 8000:8000
+        volumes:
+          - ./app:/app
+        links:
+            - database
+            - redis
+            - worker
+        environment:
+            PGDATABASE: postgres
+            PGUSER: postgres
+            PGPASSWORD: password
+            PGHOST: database
+            PGPORT: 5432
+            CELERY_HOST: redis
+            REDIS_HOST: redis
+            DJANGO_SETTINGS_MODULE: whatson.settings.dev
+
+volumes:
+    postgres-data:

@@ -1,0 +1,11 @@
+django
+psycopg2-binary
+celery
+gunicorn
+ipython
+raven
+django-extensions
+celery[redis]
+redis
+requests
+whitenoise
