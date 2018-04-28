@@ -1,0 +1,12 @@
+{
+  "name": "whatson",
+  "version": "1.0.0",
+  "description": "Build chain for whatson web app",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Matthew Segal",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {}
+}

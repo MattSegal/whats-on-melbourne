@@ -1,2 +1,11 @@
-*.pyc
+# Docker
 .env
+
+# Python
+*.pyc
+
+# NodeJS / NPM / Webpack
+node_modules/
+webpack-stats.json
+npm-debug.log.*
+build/
