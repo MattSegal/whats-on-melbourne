@@ -10,3 +10,5 @@ redis
 requests
 whitenoise
 django-webpack-loader
+graphene-django
+beautifulsoup4

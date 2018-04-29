@@ -29,8 +29,8 @@ RUN \
   pip3 install -r requirements.txt
 
 # Install NPM packages
-#COPY app/package.json .
-#RUN npm install && npm cache --force clean
+COPY app/package.json .
+RUN npm install && npm cache --force clean
 
 # Mount the codebase
 ADD app /app

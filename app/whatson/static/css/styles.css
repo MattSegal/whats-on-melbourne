@@ -22,8 +22,32 @@ header h1 {
   height: 100%;
 }
 
+.venue-overlay {
+  min-width: 150px;
+}
+
 .venue-overlay h1 {
-  color: #f00;
+  color: #444;
   font-size: 1.1rem;
-  font-weight: normal;
+  font-weight: bold;
+}
+
+.venue-overlay h1:hover {
+  color: #44f;
+  cursor: pointer;
+}
+
+.sidebar {
+    background-color: #ccc;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    z-index: 1;
+    padding: 1rem 0;
+}
+
+.sidebar h3 {
+  color: #333;
 }

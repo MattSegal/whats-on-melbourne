@@ -1,6 +1,12 @@
 # Whats On in Melbourne
 
-See https://tomchentw.github.io/react-google-maps/
+Resources:
+
+* https://tomchentw.github.io/react-google-maps/
+* https://developers.google.com/maps/documentation/javascript/reference/
+* https://developers.google.com/maps/documentation/geocoding/start
+* https://github.com/graphql-python/graphene-django
+* https://www.apollographql.com/docs/react/essentials/get-started.html
 
 ### User Stories
 

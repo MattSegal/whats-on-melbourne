@@ -27,6 +27,8 @@ services:
             CELERY_HOST: redis
             REDIS_HOST: redis
             DJANGO_SETTINGS_MODULE: whatson.settings.dev
+            # Read from .env
+            GEOCODING_API_KEY: $GEOCODING_API_KEY
     web:
         image: localhost:5000/whatson
         command: ./manage.py runserver 0.0.0.0:8000
@@ -45,6 +47,7 @@ services:
             - worker
             - webpack
         environment:
+            PYTHONIOENCODING: utf-8
             PGDATABASE: postgres
             PGUSER: postgres
             PGPASSWORD: password
@@ -53,6 +56,8 @@ services:
             CELERY_HOST: redis
             REDIS_HOST: redis
             DJANGO_SETTINGS_MODULE: whatson.settings.dev
+            # Read from .env
+            GEOCODING_API_KEY: $GEOCODING_API_KEY
     webpack:
         command: npm run dev
         build:

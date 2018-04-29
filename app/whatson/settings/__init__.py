@@ -3,6 +3,9 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+GEOCODING_API_KEY = os.environ.get('GEOCODING_API_KEY')
+
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -13,6 +16,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django_extensions',
+    'graphene_django',
     'webpack_loader',
     'whatson',
 ]
@@ -105,6 +109,10 @@ WEBPACK_LOADER = {
         'BUNDLE_DIR_NAME': '/',
         'STATS_FILE': '/app/webpack-stats.json',
     }
+}
+
+GRAPHENE = {
+    'SCHEMA': 'whatson.schema.schema'
 }
 
 # Logging
