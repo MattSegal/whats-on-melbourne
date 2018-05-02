@@ -5,7 +5,6 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
 import GoogleMap from './map'
-import mockVenue from './mock'
 import VenueMap from './venue-map'
 import Sidebar from './sidebar'
 
