@@ -7,6 +7,12 @@ const venuesQuery = gql`
     address
     latitude
     longitude
+    events {
+      name
+      artist
+      price
+      startsAt
+    }
   }
 }`
 

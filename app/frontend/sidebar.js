@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import dayjs from 'dayjs'
 
 export default class Sidebar extends React.Component {
 
@@ -20,6 +21,7 @@ export default class Sidebar extends React.Component {
 
   render() {
     const { activeVenue } = this.context
+    console.log(activeVenue)
     if (!activeVenue) {
       return null
     }
@@ -39,14 +41,17 @@ export default class Sidebar extends React.Component {
               </button>
           </div>
         </div>
+        {activeVenue.events.map((e, idx) => (
+          <div key={idx} className="row">
+            <div className="col">
+              <h5>{ e.name }</h5>
+              {e.name !== e.artist && <h5>{ e.artist }</h5>}
+              <h5>{ dayjs(e.startsAt).format('H:mm') }</h5>
+              {e.price && e.price > 0 && <h5>${ e.price }</h5>}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   }
 }
-        // {activeVenue.events.map((e, idx) => (
-        //   <div key={idx} className="row">
-        //     <div className="col">
-        //       <h5>{ e.name }</h5>
-        //     </div>
-        //   </div>
-        // ))}

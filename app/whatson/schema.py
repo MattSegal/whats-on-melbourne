@@ -4,19 +4,28 @@ Schema for GraphQL endpoint
 from graphene_django import DjangoObjectType
 import graphene
 
-from .models import Venue as VenueModel
+from .models import Venue, Event
 
 
-class Venue(DjangoObjectType):
+class VenueType(DjangoObjectType):
     class Meta:
-        model = VenueModel
+        model = Venue
+
+
+class EventType(DjangoObjectType):
+    class Meta:
+        model = Event
 
 
 class Query(graphene.ObjectType):
-    venues = graphene.List(Venue)
+    venues = graphene.List(VenueType)
+    events = graphene.List(EventType)
 
     def resolve_venues(self, info):
-        return VenueModel.objects.all()
+        return Venue.objects.all()
+
+    def resolve_events(self, info):
+        return Event.objects.all()
 
 
 schema = graphene.Schema(query=Query)
