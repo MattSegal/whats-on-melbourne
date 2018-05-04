@@ -1,0 +1,37 @@
+.sidebar {
+    background-color: #ddd;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    z-index: 1;
+    padding: 1rem 0;
+}
+.sidebar h4 {
+  color: #444;
+  margin: 1rem 1rem 1rem 0;
+}
+.sidebar h4:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.close {
+  position: absolute;
+  cursor: pointer;
+  font-size: 3rem;
+  line-height: 0.5;
+  top: 10px;
+  left: 265px;
+  z-index: 1;
+}
+
+.event {
+  background-color: #eee;
+  margin-bottom: 1rem;
+  padding: 0.3rem;
+}
+.event p {
+  margin: .3rem 0;
+}

@@ -8,6 +8,14 @@ Resources:
 * https://github.com/graphql-python/graphene-django
 * https://www.apollographql.com/docs/react/essentials/get-started.html
 
+
+Data sources:
+
+* https://www.triplejunearthed.com/discover/gigs?featured=all&field_unearthed_genre_tid=all&term_node_tid_depth=3621&field_unearthed_campaign_tid=all
+* http://www.beat.com.au/gig-guide
+* https://www.last.fm/events
+* https://pbsfm.org.au/gigs
+
 ### User Stories
 
 As a user...

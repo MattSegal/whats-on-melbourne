@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import { Query } from "react-apollo"
 import { Marker, OverlayView } from 'react-google-maps'
 
+import styles from './styles/venue-map.css'
 import { venuesQuery } from './queries'
 
 
 const getPixelPositionOffset = (width, height) => ({
-  x: 10,
-  y: -(height / 2),
+  x: -(width / 2),
+  y: 3,
 })
 
 export default class VenueMap extends React.Component {
@@ -18,12 +19,11 @@ export default class VenueMap extends React.Component {
   }
 
   handleVenueClick = venue => e => {
-    e.preventDefault()
     this.context.setActiveVenue(venue)
   }
 
   renderVenueOverlay = venue => {
-    return <div className="venue-overlay">
+    return <div className={styles.overlay}>
       <h1 onClick={this.handleVenueClick(venue)}>
         {venue.name}
       </h1>
@@ -31,20 +31,26 @@ export default class VenueMap extends React.Component {
   }
 
   renderVenueQuery = result => {
+    const { zoom } = this.props
     const { loading, error, data } = result
     if (error || loading) {
       return null
     }
     return data.venues.map((venue, idx) => (
       <div key={idx}>
-        <Marker position={{lat: venue.latitude, lng: venue.longitude}} />
-        <OverlayView
+        <Marker
+          onClick={this.handleVenueClick(venue)}
           position={{lat: venue.latitude, lng: venue.longitude}}
-          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          getPixelPositionOffset={getPixelPositionOffset}
-        >
-          {this.renderVenueOverlay(venue)}
-        </OverlayView>
+        />
+        {zoom > 14 &&
+          <OverlayView
+            position={{lat: venue.latitude, lng: venue.longitude}}
+            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+            getPixelPositionOffset={getPixelPositionOffset}
+          >
+            {this.renderVenueOverlay(venue)}
+          </OverlayView>
+        }
       </div>
     ))
   }
