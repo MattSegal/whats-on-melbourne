@@ -7,6 +7,9 @@
     width: 300px;
     z-index: 1;
     padding: 1rem 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100vh - 44px);
 }
 .sidebar h4 {
   color: #444;
@@ -15,6 +18,9 @@
 .sidebar h4:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+.sidebar::-webkit-scrollbar {
+ display: none;
 }
 
 .close {
@@ -32,6 +38,11 @@
   margin-bottom: 1rem;
   padding: 0.3rem;
 }
+.event h5 {
+    font-size: 1.1rem;
+
+}
 .event p {
+  font-size: 0.9rem;
   margin: .3rem 0;
 }

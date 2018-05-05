@@ -1,7 +1,9 @@
 """
 Schema for GraphQL endpoint
 """
-from graphene_django import DjangoObjectType
+from django.db.models import Prefetch
+from django.utils import timezone
+from graphene_django import DjangoObjectType, DjangoConnectionField
 import graphene
 
 from .models import Venue, Event
@@ -19,13 +21,24 @@ class EventType(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     venues = graphene.List(VenueType)
-    events = graphene.List(EventType)
 
     def resolve_venues(self, info):
-        return Venue.objects.all()
-
-    def resolve_events(self, info):
-        return Event.objects.all()
+        """
+        Returns all venues with events today, also filter events by date
+        """
+        now = timezone.localtime()
+        today_naieve = timezone.datetime(year=now.year, month=now.month, day=now.day)
+        today = timezone.make_aware(today_naieve)
+        event_prefetch = Prefetch(
+           'events',
+           queryset=Event.objects.filter(starts_at__gte=today)
+        )
+        return (
+            Venue.objects
+            .prefetch_related(event_prefetch)
+            .filter(events__starts_at__gte=today)
+            .all()
+        )
 
 
 schema = graphene.Schema(query=Query)

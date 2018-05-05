@@ -21,9 +21,9 @@ class Venue(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, blank=True)
+    starts_at = models.DateTimeField()
     artist = models.CharField(max_length=255)
     price = models.IntegerField(null=True, blank=True)
-    starts_at = models.DateTimeField(null=True, blank=True)
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name='events')
 
     def save(self, *args, **kwargs):
