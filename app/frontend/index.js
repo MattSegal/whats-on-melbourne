@@ -9,7 +9,7 @@ import VenueMap from './venue-map'
 import Sidebar from './sidebar'
 
 
-const client = new ApolloClient({uri: 'http://localhost:8000/graphql/'})
+const client = new ApolloClient({uri: '/graphql/'})
 
 
 class App extends React.Component {
