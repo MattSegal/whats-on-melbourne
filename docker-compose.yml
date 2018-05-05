@@ -47,7 +47,6 @@ services:
             - worker
             - webpack
         environment:
-            PYTHONIOENCODING: utf-8
             PGDATABASE: postgres
             PGUSER: postgres
             PGPASSWORD: password

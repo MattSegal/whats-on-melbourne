@@ -17,6 +17,7 @@ services:
             - PGHOST=$DOCKERHOST
             - PGPORT=5432
             - RAVEN_DSN=$WHATSON_RAVEN_DSN
+            - GEOCODING_API_KEY=$GEOCODING_API_KEY
             # Pass-through
             - DJANGO_SECRET_KEY
 
@@ -36,6 +37,7 @@ services:
             - PGHOST=$DOCKERHOST
             - PGPORT=5432
             - RAVEN_DSN=$WHATSON_RAVEN_DSN
+            - GEOCODING_API_KEY=$GEOCODING_API_KEY
             # Pass-through
             - DJANGO_SECRET_KEY
 
