@@ -6,6 +6,8 @@ ALLOWED_HOSTS = [
     '167.99.78.141',
     '127.0.0.1',
     'localhost',
+    'whatsonmelb.fun',
+    'www.whatsonmelb.fun',
 ]
 
 # Logging
