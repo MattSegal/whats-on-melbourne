@@ -7,7 +7,7 @@ echo "Starting gunicorn" && \
 gunicorn whatson.wsgi:application \
   --name whatson \
   --workers 3 \
-  --bind 0.0.0.0:9000 \
+  --bind 0.0.0.0:8003 \
   --capture-output \
   --log-level info \
   --error-logfile /var/log/gunicorn/error.log \
