@@ -25,7 +25,7 @@ services:
         image: localhost:5000/whatson
         entrypoint: /app/start-web.sh
         ports:
-            - 9000:9000
+            - 8003:8003
         environment:
             - DJANGO_SETTINGS_MODULE=whatson.settings.prod
             - CELERY_HOST=redis
