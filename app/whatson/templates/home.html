@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load static %}
 {% load render_bundle from webpack_loader %}
 
 {% block title %}What's On Melbourne{% endblock %}
@@ -8,5 +9,7 @@
 {% endblock %}
 
 {% block extra_js %}
-	{% render_bundle 'main' 'js' %}
+    <!-- FIXME: Use render_bundle -->
+    {# render_bundle 'main' 'js' #}
+    <script type="text/javascript" src="{% static 'bundle.js' %}"></script>
 {% endblock %}
