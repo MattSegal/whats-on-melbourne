@@ -14,7 +14,8 @@ services:
             - PGDATABASE=whatson
             - PGUSER=$WHATSON_DB_USER
             - PGPASSWORD=$WHATSON_DB_PASSWORD
-            - PGHOST=$DOCKERHOST
+            # Hardcode PHOST IP for now
+            - PGHOST=167.99.78.141
             - PGPORT=5432
             - RAVEN_DSN=$WHATSON_RAVEN_DSN
             - GEOCODING_API_KEY=$GEOCODING_API_KEY
@@ -34,7 +35,8 @@ services:
             - PGDATABASE=whatson
             - PGUSER=$WHATSON_DB_USER
             - PGPASSWORD=$WHATSON_DB_PASSWORD
-            - PGHOST=$DOCKERHOST
+            # Hack this in for now
+            - PGHOST=167.99.78.141
             - PGPORT=5432
             - RAVEN_DSN=$WHATSON_RAVEN_DSN
             - GEOCODING_API_KEY=$GEOCODING_API_KEY
