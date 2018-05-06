@@ -11,16 +11,18 @@
     overflow-x: hidden;
     height: calc(100vh - 44px);
 }
-.sidebar h4 {
+.sidebar::-webkit-scrollbar {
+ display: none;
+}
+
+.title {
   color: #444;
   margin: 1rem 1rem 1rem 0;
 }
-.sidebar h4:hover {
+
+.website:hover {
   cursor: pointer;
   text-decoration: underline;
-}
-.sidebar::-webkit-scrollbar {
- display: none;
 }
 
 .close {

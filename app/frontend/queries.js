@@ -7,6 +7,7 @@ const venuesQuery = gql`
     address
     latitude
     longitude
+    website
     events {
       name
       artist

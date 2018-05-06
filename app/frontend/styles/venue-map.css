@@ -1,13 +1,16 @@
 .overlay {
   text-align: center;
-  background-color: rgba(230,230,230,.6);
-  border-radius: 4px;
 }
 
 .overlay h1 {
   color: #444;
   font-size: 1.1rem;
   font-weight: bold;
+  text-shadow:
+    -3px -3px 0 #f0f0f0,
+    3px -3px 0 #f0f0f0,
+    -3px 3px 0 #f0f0f0,
+    3px 3px 0 #f0f0f0;
 }
 
 .overlay h1:hover {

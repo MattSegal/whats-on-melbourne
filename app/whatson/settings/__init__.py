@@ -142,16 +142,6 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
-        'celery.task': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True
-        },
-        'celery': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True
-        },
         'raven': {
             'level': 'DEBUG',
             'handlers': ['console'],

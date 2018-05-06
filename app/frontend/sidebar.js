@@ -18,8 +18,11 @@ export default class Sidebar extends React.Component {
   }
 
   openNewTab = url => e => {
+    const { activeVenue } = this.context
     e.preventDefault()
-    window.open(url, '_blank')
+    if (activeVenue.website) {
+      window.open(activeVenue.website, '_blank')
+    }
   }
 
   render() {
@@ -36,9 +39,20 @@ export default class Sidebar extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col">
-              <h4 onClick={this.openNewTab(activeVenue.website)}>
+              <h4 className={styles.title}>
                 { activeVenue.name }
               </h4>
+              {activeVenue.website && (
+                <p className={ styles.website }>
+                  <a
+                    href={ `${activeVenue.website}?utm_source=whatsonmelb.fun` }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    website
+                  </a>
+                </p>
+              )}
             </div>
           </div>
           {activeVenue.events.map((e, idx) => <Event key={idx} {...e}/>)}
