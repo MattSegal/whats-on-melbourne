@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.contrib.messages import constants as messages
 
-from .models import Venue, Event
+from .models import Venue, Event, Source
 from .tasks import geocode_venue
 
 
 admin.site.register(Event)
+admin.site.register(Source)
 
 @admin.register(Venue)
 class VenueAdmin(admin.ModelAdmin):

@@ -7,9 +7,34 @@ services:
             - postgres-data:/var/lib/postgresql/data
     redis:
         image: redis
+    flower:
+        command: make flower
+        ports:
+            - 5555:5553
+        expose:
+            - 5553
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+          - ./app:/app
+        links:
+            - database
+            - redis
+        environment:
+            PGDATABASE: postgres
+            PGUSER: postgres
+            PGPASSWORD: password
+            PGHOST: database
+            PGPORT: 5432
+            CELERY_HOST: redis
+            REDIS_HOST: redis
+            DJANGO_SETTINGS_MODULE: whatson.settings.dev
+            FLOWER_USER: user
+            FLOWER_PASSWORD: password
+
     worker:
-        image: localhost:5000/whatson
-        entrypoint: /app/start-worker.sh
+        command: make worker-local
         build:
             context: .
             dockerfile: Dockerfile
@@ -30,8 +55,7 @@ services:
             # Read from .env
             GEOCODING_API_KEY: $GEOCODING_API_KEY
     web:
-        image: localhost:5000/whatson
-        command: ./manage.py runserver 0.0.0.0:8000
+        command: make web-local
         build:
             context: .
             dockerfile: Dockerfile
@@ -46,6 +70,7 @@ services:
             - redis
             - worker
             - webpack
+            - flower
         environment:
             PGDATABASE: postgres
             PGUSER: postgres
@@ -58,7 +83,7 @@ services:
             # Read from .env
             GEOCODING_API_KEY: $GEOCODING_API_KEY
     webpack:
-        command: npm run dev
+        command: make webpack
         build:
             context: .
             dockerfile: Dockerfile

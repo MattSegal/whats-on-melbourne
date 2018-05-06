@@ -5,7 +5,7 @@ services:
         image: redis
     worker:
         image: localhost:5000/whatson
-        entrypoint: /app/start-worker.sh
+        entrypoint: make worker-prod
         environment:
             - DJANGO_SETTINGS_MODULE=whatson.settings.prod
             - CELERY_HOST=redis
@@ -22,9 +22,33 @@ services:
             # Pass-through
             - DJANGO_SECRET_KEY
 
+    flower:
+        image: localhost:5000/whatson
+        command: make flower
+        ports:
+            - 5553:5553
+        environment:
+            - DJANGO_SETTINGS_MODULE=whatson.settings.prod
+            - CELERY_HOST=redis
+            - REDIS_HOST=redis
+            # Postgres
+            - PGDATABASE=whatson
+            - PGUSER=$WHATSON_DB_USER
+            - PGPASSWORD=$WHATSON_DB_PASSWORD
+            # Hardcode PHOST IP for now
+            - PGHOST=167.99.78.141
+            - PGPORT=5432
+            - RAVEN_DSN=$WHATSON_RAVEN_DSN
+            - GEOCODING_API_KEY=$GEOCODING_API_KEY
+            # Pass-through
+            - DJANGO_SECRET_KEY
+            - FLOWER_USER
+            - FLOWER_PASSWORD
+
+
     web:
         image: localhost:5000/whatson
-        entrypoint: /app/start-web.sh
+        entrypoint: make web-prod
         ports:
             - 8003:8003
         environment:

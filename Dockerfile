@@ -23,11 +23,15 @@ RUN \
         iputils-ping \
         curl
 
-# Install NodeJS and NPM
+# Install NodeJS and Yarn
 RUN \
   curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
-  apt-get -qq install nodejs build-essential  && \
-  npm install npm@latest -g
+  apt-get -qq install nodejs build-essential
+RUN \
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN echo "Updating apt sources... again" && apt-get -qq update
+RUN apt-get install yarn
 
 # Install Python packages
 COPY app/requirements.txt .
@@ -37,7 +41,7 @@ RUN \
 
 # Install NPM packages
 COPY app/package.json .
-RUN npm install && npm cache --force clean
+RUN yarn install
 
 # Mount the codebase
 ADD app /app

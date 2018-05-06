@@ -2,6 +2,15 @@ from django.db import models
 from django.utils.text import slugify
 
 
+class Source(models.Model):
+    name = models.CharField(max_length=255)
+    scraper = models.CharField(max_length=255)
+    scraped_at = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Venue(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, blank=True)

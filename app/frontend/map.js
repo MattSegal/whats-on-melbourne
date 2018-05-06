@@ -2,8 +2,6 @@ import React from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import { compose, withProps, withState, withHandlers } from 'recompose'
 
-console.warn(GOOGLE_MAPS_JS_URL)
-
 // See map options here
 // https://developers.google.com/maps/documentation/javascript/reference/3/#MapOptions
 module.exports = compose(

@@ -1,11 +1,70 @@
+import importlib
+
 import requests
 from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.conf import settings
+from django.utils import timezone
+from redis import Redis
 
-from .models import Venue
+from .models import Venue, Source
 
 logger = get_task_logger(__name__)
+THIRTY_MINUTES = 60 * 30
+
+@shared_task
+def run_scrapers():
+    logger.warning('Running scrapers')
+    now = timezone.localtime()
+    today_naieve = timezone.datetime(year=now.year, month=now.month, day=now.day)
+    today = timezone.make_aware(today_naieve)
+    sources = Source.objects.exclude(scraped_at__gte=today).all()
+    for source in sources:
+        redis = Redis(host=settings.REDIS_HOST)
+        cache_key = 'scrape-{}'.format(source.name)
+        runtime = redis.get(cache_key)
+
+        if not runtime:
+            logger.warning('Dispatching %s scraper', source.name)
+            run_scraper.delay(source.pk)
+            logger.warning('Finished dispatching %s scraper', source.name)
+        else:
+            logger.warning('Scraper %s is already running: %s', source.name, runtime)
+
+    logger.warning('Finished running scrapers')
+
+
+@shared_task
+def run_scraper(source_pk):
+    source = Source.objects.get(pk=source_pk)
+
+    redis = Redis(host=settings.REDIS_HOST)
+    cache_key = 'scrape-{}'.format(source.name)
+    now = timezone.localtime()
+    result = redis.set(cache_key, str(now), ex=THIRTY_MINUTES)
+    logger.warning('Running %s scraper', source.name)
+
+    func_path = 'whatson.scrapers.{}'.format(source.scraper)
+    scraper = importlib.import_module(func_path)
+    scraper.scrape()
+
+    source.scraped_at = now
+    source.save()
+    redis.delete(cache_key)
+
+    logger.warning('Finished running %s scraper', source.name)
+    geocode_venues.delay()
+
+
+@shared_task
+def geocode_venues():
+    logger.warning('Geocoding Venues')
+    venues = Venue.objects.all()
+    for venue in venues:
+        if not (venue.address and venue.latitude and venue.longitude):
+            geocode_venue.delay(venue.pk)
+
+    logger.warning('Finished geocoding Venues')
 
 
 @shared_task

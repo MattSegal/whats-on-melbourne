@@ -1,14 +1,24 @@
+# Backend
 django
 psycopg2-binary
-celery
 gunicorn
 ipython
 raven
-django-extensions
-celery[redis]
 redis
-requests
+django-extensions
+
+# Frontend
 whitenoise
-django-webpack-loader
 graphene-django
+django-webpack-loader
+
+# API
+requests
+
+# Scrapin'
 beautifulsoup4
+
+# Celery
+celery
+celery[redis]
+flower

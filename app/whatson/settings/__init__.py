@@ -58,6 +58,7 @@ WSGI_APPLICATION = 'whatson.wsgi.application'
 
 
 # Database
+REDIS_HOST = os.environ.get('REDIS_HOST')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
