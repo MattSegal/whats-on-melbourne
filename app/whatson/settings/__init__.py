@@ -4,7 +4,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 GEOCODING_API_KEY = os.environ.get('GEOCODING_API_KEY')
-
+# Locked down to https://whatsonmelb.fun
+GOOGLE_MAPS_JS_API_KEY = 'AIzaSyAODQvpxFVBugCvwd2aXcPyLA_XTBft_hA'
 
 
 # Application definition

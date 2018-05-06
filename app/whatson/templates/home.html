@@ -9,7 +9,13 @@
 {% endblock %}
 
 {% block extra_js %}
+    <script type="text/javascript">
+        const GOOGLE_MAPS_JS_URL = '{{ maps_js_url|safe }}'
+    </script>
+
+
     <!-- FIXME: Use render_bundle -->
     {# render_bundle 'main' 'js' #}
     <script type="text/javascript" src="{% static 'bundle.js' %}"></script>
 {% endblock %}
+
