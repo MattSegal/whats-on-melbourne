@@ -13,7 +13,8 @@ worker-local:
 	celery worker \
 	--broker redis://${CELERY_HOST}:6379 \
 	--app whatson \
-	--beat
+	--beat \
+	--loglevel info
 
 worker-prod:
 	celery worker \
