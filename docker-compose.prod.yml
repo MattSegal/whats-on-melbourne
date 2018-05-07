@@ -5,7 +5,7 @@ services:
         image: redis
     worker:
         image: localhost:5000/whatson
-        entrypoint: make worker-prod
+        command: make worker-prod
         environment:
             - DJANGO_SETTINGS_MODULE=whatson.settings.prod
             - CELERY_HOST=redis
@@ -48,7 +48,7 @@ services:
 
     web:
         image: localhost:5000/whatson
-        entrypoint: make web-prod
+        command: make web-prod
         ports:
             - 8003:8003
         environment:
