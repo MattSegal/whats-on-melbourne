@@ -1,5 +1,7 @@
 # Whats On in Melbourne
 
+Live at https://whatsonmelb.fun/
+
 Resources:
 
 * https://tomchentw.github.io/react-google-maps/
@@ -42,13 +44,3 @@ As a website owner..
 
 I want to attribute my sources
 so that I drive some traffic their way.
-
-
-### Design
-
-* Markers on map with info snippet
-  * Venue
-  * Consider
-    * Number of bands
-    * Time
-* Sidebar with more info
