@@ -12,8 +12,6 @@ services:
         command: make flower
         ports:
             - 5555:5553
-        expose:
-            - 5553
         build:
             context: .
             dockerfile: Dockerfile
