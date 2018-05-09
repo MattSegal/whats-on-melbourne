@@ -103,7 +103,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join('/app/whatson/static/'),
     os.path.join('/app/build/'),
 )
 WEBPACK_LOADER = {
