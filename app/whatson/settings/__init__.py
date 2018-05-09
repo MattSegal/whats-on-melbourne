@@ -102,9 +102,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 STATICFILES_DIRS = (
-    os.path.join('/app/whatson/static/'),
-    os.path.join('/app/build/'),
+    '/app/whatson/static/',
+    '/app/build/',
 )
 WEBPACK_LOADER = {
     'DEFAULT': {
