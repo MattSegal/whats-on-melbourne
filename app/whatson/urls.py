@@ -11,6 +11,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # FIXME: https://github.com/graphql-python/graphene-django/issues/61
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
-    path('googlee13aedb0c65b7f13.html', TemplateView.as_view(template_name='google_confirm.html')),
     path('', views.HomeView.as_view(), name='home'),
 ]
