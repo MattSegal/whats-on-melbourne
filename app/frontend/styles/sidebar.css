@@ -37,9 +37,19 @@
 
 .event {
   background-color: #eee;
+  cursor: pointer;
   margin-bottom: 1rem;
   padding: 0.3rem;
+  position: relative;
 }
+.event:hover {
+  color: #fff;
+  background-color: #ccc;
+}
+.event:hover .cta {
+  color: #fff;
+}
+
 .event h5 {
     font-size: 1.1rem;
 
@@ -47,4 +57,12 @@
 .event p {
   font-size: 0.9rem;
   margin: .3rem 0;
+}
+.event .cta {
+  font-style: italic;
+  font-size: 0.7rem;
+  position: absolute;
+  bottom: 0rem;
+  right: 0.4rem;
+  color: #666;
 }

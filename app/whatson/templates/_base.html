@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     {% block extra_css %}{% endblock %}
+    {% block extra_meta %}{% endblock %}
 </head>
 <body>
     <header>
       <div class="container">
-        <div class="row">
+        <div class="row d-flex justify-content-between">
           <div class="col"><h1>What's On Melbourne</h1></div>
+          <div class="thanks col col-md-4 col-lg-3">
+              <a href="http://www.beat.com.au/gig-guide?utm_source=whatsonmelb.fun" target="_blank" rel="noopener noreferrer">
+                <h2>Powered by</h2>
+                <img height="20" src="{% static '/img/beat_logo.png' %}">
+              </a>
+          </div>
         </div>
       </div>
     </header>
@@ -20,5 +27,15 @@
       {% block content %}{% endblock %}
     </main>
     {% block extra_js %}{% endblock %}
+    {# Google Analytics #}
+    {% if enable_analytics %}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-103174696-2"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-103174696-2');
+      </script>
+    {% endif %}
 </body>
 </html>

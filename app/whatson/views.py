@@ -22,4 +22,9 @@ class HomeView(TemplateView):
         context['maps_js_url'] = '{}?{}'.format(
             maps_js_url, urlencode(maps_params)
         )
+
+        context['description'] = 'Discover music and events that are on tonight in Melbourne'
+        context['title'] = 'What\'s On Melbourne'
+        context['canonical_url'] = 'https://whatsonmelb.fun'
+        context['enable_analytics'] = settings.DEBUG
         return context

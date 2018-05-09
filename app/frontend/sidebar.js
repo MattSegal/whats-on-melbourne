@@ -17,14 +17,6 @@ export default class Sidebar extends React.Component {
     this.context.unsetActiveVenue()
   }
 
-  openNewTab = url => e => {
-    const { activeVenue } = this.context
-    e.preventDefault()
-    if (activeVenue.website) {
-      window.open(activeVenue.website, '_blank')
-    }
-  }
-
   render() {
     const { activeVenue } = this.context
     if (!activeVenue) {
@@ -62,29 +54,33 @@ export default class Sidebar extends React.Component {
   }
 }
 
-const Event = props => {
-  const { name, artist, startsAt, price} = props
 
-  const artistEl = name !== artist &&
-    <p><strong>Artist:</strong> { artist }</p>
+class Event extends React.Component {
 
-  const startEl = startsAt &&
-    <p><strong>Starts:</strong> { dayjs(startsAt).format('H:mm') }</p>
+  render() {
+    const { name, artist, startsAt, price} = this.props
+    const artistEl = name !== artist &&
+      <p><strong>Artist:</strong> { artist }</p>
 
-  let priceEl
-  if (price && price > 0) {
-    priceEl = <p><strong>Price:</strong> ${ price }</p>
-  }
-  return (
-    <div className="row">
-      <div className="col">
-        <div className={styles.event}>
-          <h5>{ name }</h5>
-          {artistEl}
-          {startEl}
-          {priceEl}
+    const startEl = startsAt &&
+      <p><strong>Starts:</strong> { dayjs(startsAt).format('H:mm') }</p>
+
+    let priceEl
+    if (price && price > 0) {
+      priceEl = <p><strong>Price:</strong> ${ price }</p>
+    }
+    return (
+      <div className="row">
+        <div className="col">
+          <div className={styles.event}>
+            <h5>{ name }</h5>
+            {artistEl}
+            {startEl}
+            {priceEl}
+            <div className={styles.cta}>Click for search</div>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }

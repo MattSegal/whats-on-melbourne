@@ -10,6 +10,32 @@ header h1 {
     margin: 0;
 }
 
+.thanks a {
+  color: #212529;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.thanks h2 {
+  font-size: 1.2rem;
+  display: inline-block;
+  font-weight: bold;
+  margin: 0 0.4rem 0 0;
+}
+
+.thanks img {
+  margin-bottom: 0.1rem;
+}
+
+@media (max-width : 900px) {
+  .thanks {
+    display: none;
+  }
+}
+
 #app {
   position: absolute;
   top: 44px;
