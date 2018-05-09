@@ -16,32 +16,47 @@ class App extends React.Component {
 
   static childContextTypes = {
     activeVenue: PropTypes.object,
+    activeEvent: PropTypes.object,
     setActiveVenue: PropTypes.func,
     unsetActiveVenue: PropTypes.func,
+    setActiveEvent: PropTypes.func,
+    unsetActiveEvent: PropTypes.func,
   }
 
  constructor(props, context) {
     super(props, context)
     this.state = {
       activeVenue: null,
+      activeEvent: null
     }
 
   }
 
   getChildContext() {
     return {
+      activeEvent: this.state.activeEvent,
       activeVenue: this.state.activeVenue,
       setActiveVenue: this.setActiveVenue,
       unsetActiveVenue: this.unsetActiveVenue,
+      setActiveEvent: this.setActiveEvent,
+      unsetActiveEvent: this.unsetActiveEvent,
     }
   }
 
   setActiveVenue = venue => {
-    this.setState({activeVenue: venue})
+    this.setState({activeVenue: venue, activeEvent: null})
   }
 
   unsetActiveVenue = () => {
-    this.setState({activeVenue: null})
+    this.setState({activeVenue: null, activeEvent: null})
+  }
+
+  setActiveEvent = event => e => {
+    this.setState({activeEvent: event})
+  }
+
+  unsetActiveEvent = e => {
+    this.setState({activeEvent: null})
   }
 
   render() {

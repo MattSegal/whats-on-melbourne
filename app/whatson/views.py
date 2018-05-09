@@ -26,5 +26,5 @@ class HomeView(TemplateView):
         context['description'] = 'Discover music and events that are on tonight in Melbourne'
         context['title'] = 'What\'s On Melbourne'
         context['canonical_url'] = 'https://whatsonmelb.fun'
-        context['enable_analytics'] = settings.DEBUG
+        context['enable_analytics'] = not settings.DEBUG
         return context

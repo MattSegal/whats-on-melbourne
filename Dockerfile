@@ -10,7 +10,7 @@ ENV TIMEZONE Australia/Melbourne
 WORKDIR /app
 
 RUN \
-	echo "Updating apt sources." && \
+    echo "Updating apt sources." && \
     apt-get -qq update && \
     echo "Installing required packages." && \
     apt-get -qq install \
@@ -36,7 +36,7 @@ RUN apt-get install yarn
 # Install Python packages
 COPY app/requirements.txt .
 RUN \
-	echo "Installing python packages..." && \
+  echo "Installing python packages..." && \
   pip3 install -r requirements.txt
 
 # Install NPM packages

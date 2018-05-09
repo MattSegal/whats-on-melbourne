@@ -109,6 +109,12 @@ def scrape_gig_page(gig_path):
             logger.warning('Could not parse price %s for %s', price_data_text, gig_path)
 
     gig_data['venue'], _ = Venue.objects.get_or_create(name=gig_data['venue'])
+
+    if 'trivia' in gig_data['name'].lower():
+        gig_data['event_type'] = 'TRIVIA'
+    else:
+        gig_data['event_type'] = 'MUSIC'
+
     Event.objects.get_or_create(
         name=gig_data['name'],
         starts_at=gig_data['starts_at'],

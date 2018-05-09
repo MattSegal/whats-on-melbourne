@@ -29,12 +29,18 @@ class Venue(models.Model):
 
 
 class Event(models.Model):
+    EVENT_TYPES = (
+        ('MUSIC', 'Music'),
+        ('TRIVIA', 'Trivia'),
+    )
+
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, blank=True)
     starts_at = models.DateTimeField()
     artist = models.CharField(max_length=255)
     price = models.IntegerField(null=True, blank=True)
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name='events')
+    event_type = models.CharField(max_length=15, choices=EVENT_TYPES)
 
     def save(self, *args, **kwargs):
         if not self.slug:
