@@ -12,6 +12,7 @@ const venuesQuery = gql`
       name
       artist
       price
+      eventType
       startsAt
     }
   }

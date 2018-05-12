@@ -24,7 +24,7 @@ services:
 
     flower:
         image: localhost:5000/whatson
-        command: make flower
+        command: make flower-prod
         ports:
             - 5553:5553
         environment:

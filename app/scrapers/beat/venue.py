@@ -10,7 +10,6 @@ logger = get_task_logger(__name__)
 
 
 def scrape_venue_page(venue_path):
-    logger.warning('Scraping venue: %s', venue_path)
     venue_data = {}
     try:
         venue_resp = requests.get('http://www.beat.com.au' + venue_path)

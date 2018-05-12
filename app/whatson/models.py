@@ -30,8 +30,14 @@ class Venue(models.Model):
 
 class Event(models.Model):
     EVENT_TYPES = (
-        ('MUSIC', 'Music'),
         ('TRIVIA', 'Trivia'),
+        ('JAZZ', 'Jazz'),
+        ('ARTS', 'Arts and Theatre'),
+        ('HIPHOP', 'Hip-Hop'),
+        ('EDM', 'Electronic Dance Music'),
+        ('ROCK', 'Rock'),
+        ('FOLK', 'Folk'),
+        ('COMEDY', 'Comedy')
     )
 
     name = models.CharField(max_length=255)
@@ -40,7 +46,7 @@ class Event(models.Model):
     artist = models.CharField(max_length=255)
     price = models.IntegerField(null=True, blank=True)
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name='events')
-    event_type = models.CharField(max_length=15, choices=EVENT_TYPES)
+    event_type = models.CharField(max_length=15, choices=EVENT_TYPES, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

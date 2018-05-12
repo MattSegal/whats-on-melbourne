@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
 
 import styles from './styles/sidebar.css'
 
 
-export default class Sidebar extends React.Component {
+export default class Sidebar extends Component {
 
   static contextTypes = {
     activeEvent: PropTypes.object,
@@ -52,7 +52,7 @@ export default class Sidebar extends React.Component {
   }
 }
 
-class EventList extends React.Component {
+class EventList extends Component {
 
   render() {
     const { events } = this.props
@@ -65,7 +65,7 @@ class EventList extends React.Component {
 }
 
 
-class Event extends React.Component {
+class Event extends Component {
 
   static propTypes = {
     event: PropTypes.shape({
@@ -101,6 +101,7 @@ class Event extends React.Component {
             onClick={setActiveEvent(event)}
           >
             <h5>{ event.name }</h5>
+            <GenrePill event={event} />
             {artistEl}
             {startEl}
             {priceEl}
@@ -113,7 +114,7 @@ class Event extends React.Component {
 }
 
 
-class ActiveEvent extends React.Component {
+class ActiveEvent extends Component {
 
   static propTypes = {
     event: PropTypes.shape({
@@ -168,6 +169,7 @@ class ActiveEvent extends React.Component {
         <div className="col">
           <div className={styles.event}>
             <h5>{ event.name }</h5>
+            <GenrePill event={event} />
             {artistEl}
             {startEl}
             {priceEl}
@@ -186,3 +188,16 @@ class ActiveEvent extends React.Component {
   }
 }
 
+
+class GenrePill extends Component {
+  render() {
+    const { event } = this.props
+    if (!event.eventType) {
+      return
+    }
+    const className = `${styles.genre} ${styles[event.eventType.toLowerCase()]}`
+    return (
+      <div className={className}>{event.eventType}</div>
+    )
+  }
+}

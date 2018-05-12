@@ -1,5 +1,15 @@
 
-flower:
+flower-local:
+	celery flower \
+	--app whatson \
+	--broker redis://${CELERY_HOST}:6379 \
+	--address=0.0.0.0 \
+	--port=5553 \
+	--basic_auth="${FLOWER_USER}:${FLOWER_PASSWORD}" \
+	--logfile /var/log/flower.log \
+	--loglevel info \
+
+flower-prod:
 	celery flower \
 	--app whatson \
 	--broker redis://${CELERY_HOST}:6379 \
@@ -9,6 +19,7 @@ flower:
 	--logfile /var/log/flower.log \
 	--loglevel info \
 	--url_prefix=flower
+
 
 worker-local:
 	watchmedo \
@@ -21,7 +32,7 @@ worker-local:
 	celery worker \
 	--broker redis://${CELERY_HOST}:6379 \
 	--app whatson \
-	--concurrency 4 \
+	--concurrency 10 \
 	--beat \
 	--loglevel info
 

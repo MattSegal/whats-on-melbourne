@@ -74,8 +74,6 @@ def scrape_gig_page(gig_path):
 
     if 'trivia' in gig_data['name'].lower():
         gig_data['event_type'] = 'TRIVIA'
-    else:
-        gig_data['event_type'] = 'MUSIC'
 
     Event.objects.get_or_create(
         name=gig_data['name'],

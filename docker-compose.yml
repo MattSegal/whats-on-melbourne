@@ -9,7 +9,7 @@ services:
         image: redis
     flower:
         image: localhost:5000/whatson
-        command: make flower
+        command: make flower-local
         ports:
             - 5555:5553
         build:

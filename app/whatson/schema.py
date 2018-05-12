@@ -31,7 +31,7 @@ class Query(graphene.ObjectType):
         today = timezone.make_aware(today_naieve)
         event_prefetch = Prefetch(
            'events',
-           queryset=Event.objects.filter(starts_at__gte=today)
+           queryset=Event.objects.filter(starts_at__gte=today).order_by('starts_at')
         )
         return (
             Venue.objects

@@ -5,12 +5,12 @@ from scrapers.beat import scrape;scrape()
 """
 import bs4
 import requests
-from celery import chord, group
+from celery import chord
 from celery.utils.log import get_task_logger
 from requests.exceptions import RequestException
 
-# Celery is being weird, imports scrape_beat_venue, scrape_beat_gig
-from ..tasks import *
+# Celery is being weird, imports scrape_beat_venue, scrape_beat_gig, scrape_beat_genres
+from scrapers.tasks import *
 
 logger = get_task_logger(__name__)
 
@@ -51,5 +51,6 @@ def scrape():
         seen.add(venue_path)
         venue_tasks.append(scrape_beat_venue.si(venue_path))
 
-    # Execute all venue tasks in parallel, then all gig tasks in parallel
-    chord(venue_tasks,  group(*gig_tasks)).apply_async()
+    # Execute all venue tasks in parallel, then all gig tasks in parallel, then scrape genres
+    gigs_then_genres = chord(gig_tasks, scrape_beat_genres.si())
+    venue_then_gigs_then_genres = chord(venue_tasks, gigs_then_genres).apply_async()

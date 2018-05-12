@@ -80,3 +80,34 @@
   margin-bottom: 0.5rem;
   font-size: 0.8rem;
 }
+
+.genre {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+.genre.jazz {
+  background-color: #FF776B;
+}
+.genre.arts {
+  background-color: #C89BFF;
+}
+.genre.trivia {
+  background-color: #FDABFF;
+}
+.genre.hiphop {
+  background-color: #FD8D08;
+}
+.genre.edm {
+  background-color: #01BF00;
+}
+.genre.rock {
+  background-color: #6B98FF;
+}
+.genre.folk {
+  background-color: #BCE3FF;
+}
+.genre.comedy {
+  background-color: #FFED5C;
+}

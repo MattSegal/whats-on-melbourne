@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
@@ -12,7 +12,7 @@ import Sidebar from './sidebar'
 const client = new ApolloClient({uri: '/graphql/'})
 
 
-class App extends React.Component {
+class App extends Component {
 
   static childContextTypes = {
     activeVenue: PropTypes.object,

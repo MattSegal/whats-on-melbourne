@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { cloneElement } from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import { compose, withProps, withState, withHandlers } from 'recompose'
 
@@ -41,6 +41,6 @@ module.exports = compose(
       clickableIcons: false,
     }}
   >
-    {React.cloneElement(props.children, { zoom: props.zoom })}
+    {cloneElement(props.children, { zoom: props.zoom })}
   </GoogleMap>
 )
