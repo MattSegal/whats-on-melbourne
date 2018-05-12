@@ -22,3 +22,6 @@ beautifulsoup4
 celery
 celery[redis]
 flower
+
+# Development
+watchdog

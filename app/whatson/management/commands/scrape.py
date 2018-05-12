@@ -13,6 +13,6 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         scraper_name = options['site']
-        func_path = 'whatson.scrapers.{}'.format(scraper_name)
+        func_path = 'scrapers.{}'.format(scraper_name)
         scraper = importlib.import_module(func_path)
         scraper.scrape()

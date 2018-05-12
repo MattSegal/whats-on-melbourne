@@ -11,9 +11,17 @@ flower:
 	--url_prefix=flower
 
 worker-local:
+	watchmedo \
+	auto-restart \
+	--directory /app/whatson/ \
+	--directory /app/scrapers/ \
+	--recursive \
+	--pattern '*.py' \
+	-- \
 	celery worker \
 	--broker redis://${CELERY_HOST}:6379 \
 	--app whatson \
+	--concurrency 4 \
 	--beat \
 	--loglevel info
 

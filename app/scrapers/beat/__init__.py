@@ -1,0 +1,55 @@
+"""
+Web scraper for Beat Magazine Gig Guide
+http://www.beat.com.au/gig-guide
+from scrapers.beat import scrape;scrape()
+"""
+import bs4
+import requests
+from celery import chord, group
+from celery.utils.log import get_task_logger
+from requests.exceptions import RequestException
+
+# Celery is being weird, imports scrape_beat_venue, scrape_beat_gig
+from ..tasks import *
+
+logger = get_task_logger(__name__)
+
+
+def scrape():
+    logger.warning('Scraping Beat Magazine')
+    url = 'http://www.beat.com.au/gig-guide'
+    try:
+        resp = requests.get(url)
+        resp.raise_for_status()
+    except RequestException:
+        logger.exception('Could not scrape Beat Magazine')
+        return
+
+    soup = bs4.BeautifulSoup(resp.content.decode('utf-8'), 'html.parser')
+
+    # Marshal gig scraping tasks
+    gigs = soup.find_all('a', {'href' : lambda h: h and h.startswith('/gig/')})
+    seen = set()
+    gig_tasks = []
+    for gig in gigs:
+        gig_path = gig['href']
+        if gig_path in seen:
+            continue
+
+        seen.add(gig_path)
+        gig_tasks.append(scrape_beat_gig.si(gig_path))
+
+    # Marshal veneue scraping tasks
+    venue_tasks = []
+    venues = soup.find_all('a', {'href' : lambda h: h and h.startswith('/venue/')})
+    seen = set()
+    for venue in venues:
+        venue_path = venue['href']
+        if venue_path in seen:
+            continue
+
+        seen.add(venue_path)
+        venue_tasks.append(scrape_beat_venue.si(venue_path))
+
+    # Execute all venue tasks in parallel, then all gig tasks in parallel
+    chord(venue_tasks,  group(*gig_tasks)).apply_async()

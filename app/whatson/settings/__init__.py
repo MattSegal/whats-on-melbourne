@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'graphene_django',
     'webpack_loader',
+    'scrapers',
     'whatson',
 ]
 

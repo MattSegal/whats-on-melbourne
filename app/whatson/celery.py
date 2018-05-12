@@ -6,9 +6,10 @@ from django.conf import settings
 HOUR = 60 * 60
 
 
-celery_host = os.environ.get('CELERY_HOST')
-app = Celery('whatson', broker='redis://{}:6379'.format(celery_host))
+celery_host = 'redis://{}:6379'.format(os.environ.get('CELERY_HOST'))
+app = Celery('whatson', backend=celery_host, broker=celery_host)
 app.config_from_object('django.conf:settings', namespace='CELERY')
+app.autodiscover_tasks()
 
 
 @app.on_after_finalize.connect

@@ -44,7 +44,7 @@ def run_scraper(source_pk):
     result = redis.set(cache_key, str(now), ex=THIRTY_MINUTES)
     logger.warning('Running %s scraper', source.name)
 
-    func_path = 'whatson.scrapers.{}'.format(source.scraper)
+    func_path = 'scrapers.{}'.format(source.scraper)
     scraper = importlib.import_module(func_path)
     scraper.scrape()
 

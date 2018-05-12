@@ -44,3 +44,11 @@ As a website owner..
 
 I want to attribute my sources
 so that I drive some traffic their way.
+
+### Future Work
+
+* Dates in the future (tomorrow night, etc)
+* Categorize genres (different pin colors?)
+* Improve mobile performance
+* Improve display of gig names on pins
+* Add other data sources
