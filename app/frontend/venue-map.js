@@ -38,7 +38,7 @@ export default class VenueMap extends Component {
   getIcon = venue => {
 
     const eventTypes = venue.events.filter(e => e.eventType)
-    const eventType = eventTypes ? eventTypes.slice(-1)[0].eventType : 'UNKNOWN'
+    const eventType = eventTypes.length > 0 ? eventTypes.slice(-1)[0].eventType : 'UNKNOWN'
     return {
       url: genreMap[eventType],
       labelOrigin: new google.maps.Point(15, 45),
@@ -46,7 +46,7 @@ export default class VenueMap extends Component {
   }
 
   getLabel = venue => ({
-    fontSize: '14px',
+    fontSize: '18px',
     text: venue.name,
   })
 
