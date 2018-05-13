@@ -50,13 +50,30 @@ export default class VenueMap extends Component {
     text: venue.name,
   })
 
-  renderVenueQuery = result => {
+  renderVenueMarker = (venue, idx) => {
+    if (!venue.latitude || !venue.longitude) {
+      console.error(`Bad coordinates for ${venue.name}. lat, lng: ${venue.latitude}, ${venue.longitude}`)
+      return null
+    }
     const { zoom } = this.props
+    return (
+      <Marker
+        key={idx}
+        cursor="pointer"
+        icon={this.getIcon(venue)}
+        label={zoom > 15 ? this.getLabel(venue) : ''}
+        onClick={this.handleVenueClick(venue)}
+        position={{lat: venue.latitude, lng: venue.longitude}}
+      />
+    )
+  }
+
+
+  renderVenueQuery = result => {
     const { loading, error, data } = result
     if (error || loading) {
       return null
     }
-    // console.log(googleMaps)
     return (
       <MarkerClusterer
         averageCenter={true}
@@ -65,16 +82,7 @@ export default class VenueMap extends Component {
         maxZoom={12}
         minimumClusterSize={5}
       >
-      {data.venues.map((venue, idx) => (
-        <Marker
-          key={idx}
-          cursor="pointer"
-          icon={this.getIcon(venue)}
-          label={zoom > 15 ? this.getLabel(venue) : ''}
-          onClick={this.handleVenueClick(venue)}
-          position={{lat: venue.latitude, lng: venue.longitude}}
-        />
-      ))}
+      {data.venues.map(this.renderVenueMarker)}
       </MarkerClusterer>
     )
   }
