@@ -57,5 +57,4 @@ so that I drive some traffic their way.
     - theatre
     - comedy
 * Improve infrastructure
-    - centralized logs
     - automated db backups
