@@ -48,13 +48,14 @@ so that I drive some traffic their way.
 ### Future Work
 
 * Dates in the future (tomorrow night, etc)
-* Categorize genres (different pin colors?)
-* Improve mobile performance
-* Improve display of gig names on pins
+* Improve beat scraper
+    - collect supporting acts
+* Improve SEO
+    - add event schema
 * Add other data sources
-
-
-to
-    - logs
+    - pub poker
+    - theatre
+    - comedy
+* Improve infrastructure
+    - centralized logs
     - automated db backups
-    - add ga interaction events

@@ -5,8 +5,13 @@ from .models import Venue, Event, Source
 from .tasks import geocode_venue
 
 
-admin.site.register(Event)
 admin.site.register(Source)
+
+@admin.register(Event)
+class Event(admin.ModelAdmin):
+    list_display = ['name', 'venue', 'starts_at']
+    list_filter = ['starts_at', 'venue']
+
 
 @admin.register(Venue)
 class VenueAdmin(admin.ModelAdmin):

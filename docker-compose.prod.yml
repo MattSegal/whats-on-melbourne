@@ -10,15 +10,22 @@ services:
             - DJANGO_SETTINGS_MODULE=whatson.settings.prod
             - CELERY_HOST=redis
             - REDIS_HOST=redis
+
             # Postgres
             - PGDATABASE=whatson
             - PGUSER=$WHATSON_DB_USER
             - PGPASSWORD=$WHATSON_DB_PASSWORD
-            # Hardcode PHOST IP for now
-            - PGHOST=167.99.78.141
+            - PGHOST=167.99.78.141  # Hardcode PHOST IP for now
             - PGPORT=5432
+
+            # Papertrail
+            - PAPERTRAIL_HOSTNAME=$WHATSON_PAPERTRAIL_HOSTNAME
+            - PAPERTRAIL_URL=$WHATSON_PAPERTRAIL_URL
+            - PAPERTRAIL_PORT=$WHATSON_PAPERTRAIL_PORT
+
             - RAVEN_DSN=$WHATSON_RAVEN_DSN
             - GEOCODING_API_KEY=$GEOCODING_API_KEY
+
             # Pass-through
             - DJANGO_SECRET_KEY
 
@@ -31,20 +38,25 @@ services:
             - DJANGO_SETTINGS_MODULE=whatson.settings.prod
             - CELERY_HOST=redis
             - REDIS_HOST=redis
+
             # Postgres
             - PGDATABASE=whatson
             - PGUSER=$WHATSON_DB_USER
             - PGPASSWORD=$WHATSON_DB_PASSWORD
-            # Hardcode PHOST IP for now
-            - PGHOST=167.99.78.141
+            - PGHOST=167.99.78.141  # Hardcode PHOST IP for now
             - PGPORT=5432
             - RAVEN_DSN=$WHATSON_RAVEN_DSN
             - GEOCODING_API_KEY=$GEOCODING_API_KEY
+
+            # Papertrail
+            - PAPERTRAIL_HOSTNAME=$WHATSON_PAPERTRAIL_HOSTNAME
+            - PAPERTRAIL_URL=$WHATSON_PAPERTRAIL_URL
+            - PAPERTRAIL_PORT=$WHATSON_PAPERTRAIL_PORT
+
             # Pass-through
             - DJANGO_SECRET_KEY
             - FLOWER_USER
             - FLOWER_PASSWORD
-
 
     web:
         image: localhost:5000/whatson
@@ -55,15 +67,22 @@ services:
             - DJANGO_SETTINGS_MODULE=whatson.settings.prod
             - CELERY_HOST=redis
             - REDIS_HOST=redis
+
             # Postgres
             - PGDATABASE=whatson
             - PGUSER=$WHATSON_DB_USER
             - PGPASSWORD=$WHATSON_DB_PASSWORD
-            # Hack this in for now
-            - PGHOST=167.99.78.141
+            - PGHOST=167.99.78.141  # Hack this in for now
             - PGPORT=5432
+
+            # Papertrail
+            - PAPERTRAIL_HOSTNAME=$WHATSON_PAPERTRAIL_HOSTNAME
+            - PAPERTRAIL_URL=$WHATSON_PAPERTRAIL_URL
+            - PAPERTRAIL_PORT=$WHATSON_PAPERTRAIL_PORT
+
             - RAVEN_DSN=$WHATSON_RAVEN_DSN
             - GEOCODING_API_KEY=$GEOCODING_API_KEY
+
             # Pass-through
             - DJANGO_SECRET_KEY
 

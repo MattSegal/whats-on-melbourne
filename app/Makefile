@@ -10,6 +10,15 @@ flower-local:
 	--loglevel info \
 
 flower-prod:
+	echo "Starting remote syslog" && \
+	touch /var/log/flower.log && \
+	remote_syslog \
+	--hostname $PAPERTRAIL_HOSTNAME \
+	--dest-port $PAPERTRAIL_PORT \
+	--dest-host $PAPERTRAIL_URL \
+	--pid-file /var/run/remote_syslog.pid \
+	/var/log/flower.log && \
+	echo "Starting celery flower" && \
 	celery flower \
 	--app whatson \
 	--broker redis://${CELERY_HOST}:6379 \
@@ -37,6 +46,15 @@ worker-local:
 	--loglevel info
 
 worker-prod:
+	echo "Starting remote syslog" && \
+	touch /var/log/celery.log && \
+	remote_syslog \
+	--hostname $PAPERTRAIL_HOSTNAME \
+	--dest-port $PAPERTRAIL_PORT \
+	--dest-host $PAPERTRAIL_URL \
+	--pid-file /var/run/remote_syslog.pid \
+	/var/log/celery.log && \
+	echo "Starting celery" && \
 	celery worker \
 	--broker redis://${CELERY_HOST}:6379 \
 	--app whatson \
@@ -53,9 +71,19 @@ web-local:
 
 web-prod:
 	echo "Starting whatson app as `whoami`" && \
+	echo "Starting remote syslog" && \
+	mkdir -p /var/log/gunicorn && \
+	touch /var/log/gunicorn/access.log && \
+	touch /var/log/gunicorn/error.log && \
+	remote_syslog \
+	--hostname $PAPERTRAIL_HOSTNAME \
+	--dest-port $PAPERTRAIL_PORT \
+	--dest-host $PAPERTRAIL_URL \
+	--pid-file /var/run/remote_syslog.pid \
+	/var/log/gunicorn/access.log \
+	/var/log/gunicorn/error.log && \
 	echo "Running migrations" && \
 	./manage.py migrate && \
-	mkdir -p /var/log/gunicorn && \
 	echo "Starting gunicorn" && \
 	gunicorn whatson.wsgi:application \
 	--name whatson \

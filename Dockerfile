@@ -23,6 +23,16 @@ RUN \
         iputils-ping \
         curl
 
+RUN \
+  echo "Installing remote_syslog2 for Papertrail" && \
+  curl \
+    --location \
+    --silent \
+    https://github.com/papertrail/remote_syslog2/releases/download/v0.20/remote-syslog2_0.20_amd64.deb \
+    -o /tmp/remote_syslog.deb && \
+  dpkg -i /tmp/remote_syslog.deb
+
+
 # Install NodeJS and Yarn
 RUN \
   curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
