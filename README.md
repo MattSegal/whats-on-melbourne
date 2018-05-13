@@ -57,3 +57,4 @@ so that I drive some traffic their way.
 to
     - logs
     - automated db backups
+    - add ga interaction events

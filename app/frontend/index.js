@@ -44,18 +44,40 @@ class App extends Component {
   }
 
   setActiveVenue = venue => {
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'Venue',
+      eventAction: 'click',
+      eventLabel: venue.name
+    })
     this.setState({activeVenue: venue, activeEvent: null})
   }
 
   unsetActiveVenue = () => {
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'Venue',
+      eventAction: 'close',
+    })
     this.setState({activeVenue: null, activeEvent: null})
   }
 
   setActiveEvent = event => e => {
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'Event',
+      eventAction: 'click',
+      eventLabel: event.name
+    })
     this.setState({activeEvent: event})
   }
 
   unsetActiveEvent = e => {
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'Event',
+      eventAction: 'close',
+    })
     this.setState({activeEvent: null})
   }
 

@@ -18,6 +18,16 @@ export default class Sidebar extends Component {
     this.context.unsetActiveVenue()
   }
 
+  logVisitVenueWebsite = venue => e => {
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'Venue',
+      eventAction: 'website',
+      eventLabel: venue.name,
+      eventValue: venue.website,
+    })
+  }
+
   render() {
     const { activeVenue, activeEvent } = this.context
     if (!activeVenue) {
@@ -37,7 +47,10 @@ export default class Sidebar extends Component {
               </h4>
               {activeVenue.website && (
                 <p className={ styles.website }>
-                  <a href={`${activeVenue.website}?utm_source=whatsonmelb.fun`}>
+                  <a
+                    href={`${activeVenue.website}?utm_source=whatsonmelb.fun`}
+                    onClick={this.logVisitVenueWebsite(activeVenue)}
+                  >
                     venue website
                   </a>
                 </p>
@@ -130,25 +143,53 @@ class ActiveEvent extends Component {
     unsetActiveEvent: PropTypes.func,
   }
 
+  logSearchClick = site => e => {
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'Search Event',
+      eventAction: 'click',
+      eventLabel: site,
+      eventValue: this.props.event.artist,
+    })
+  }
+
   renderSoundCloudSearch() {
     const { event } = this.props
     const query = encodeURIComponent(event.artist || event.name)
     const search = `https://soundcloud.com/search/sets?q=${query}`
-    return <div><a href={search}>search SoundCloud</a></div>
+    return (
+      <div>
+        <a onClick={this.logSearchClick('SoundCloud')} href={search}>
+          search SoundCloud
+        </a>
+      </div>
+    )
   }
 
   renderBandCampSearch() {
     const { event } = this.props
     const query = encodeURIComponent(event.artist || event.name)
     const search = `https://bandcamp.com/search?q=${query}`
-    return <div><a href={search}>search BandCamp</a></div>
+    return (
+      <div>
+        <a onClick={this.logSearchClick('BandCamp')} href={search}>
+          search BandCamp
+        </a>
+      </div>
+    )
   }
 
   renderYoutubeSearch() {
     const { event } = this.props
     const query = encodeURIComponent(event.artist || event.name)
     const search = `https://www.youtube.com/results?search_query=${query}`
-    return <div><a href={search}>search YouTube</a></div>
+    return (
+      <div>
+        <a onClick={this.logSearchClick('YouTube')} href={search}>
+          search YouTube
+        </a>
+      </div>
+    )
   }
 
   render() {
