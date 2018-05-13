@@ -9,8 +9,7 @@ from celery import chord
 from celery.utils.log import get_task_logger
 from requests.exceptions import RequestException
 
-# Celery is being weird, imports scrape_beat_venue, scrape_beat_gig, scrape_beat_genres
-from scrapers.tasks import *
+from scrapers import tasks
 
 logger = get_task_logger(__name__)
 
@@ -37,7 +36,7 @@ def scrape():
             continue
 
         seen.add(gig_path)
-        gig_tasks.append(scrape_beat_gig.si(gig_path))
+        gig_tasks.append(tasks.scrape_beat_gig.si(gig_path))
 
     # Marshal veneue scraping tasks
     venue_tasks = []
@@ -49,8 +48,8 @@ def scrape():
             continue
 
         seen.add(venue_path)
-        venue_tasks.append(scrape_beat_venue.si(venue_path))
+        venue_tasks.append(tasks.scrape_beat_venue.si(venue_path))
 
     # Execute all venue tasks in parallel, then all gig tasks in parallel, then scrape genres
-    gigs_then_genres = chord(gig_tasks, scrape_beat_genres.si())
+    gigs_then_genres = chord(gig_tasks, tasks.scrape_beat_genres.si())
     venue_then_gigs_then_genres = chord(venue_tasks, gigs_then_genres).apply_async()
