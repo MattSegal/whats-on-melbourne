@@ -40,6 +40,7 @@ worker-prod:
 	celery worker \
 	--broker redis://${CELERY_HOST}:6379 \
 	--app whatson \
+	--concurrency 10 \
 	--beat \
 	--logfile /var/log/celery.log \
 	--loglevel info

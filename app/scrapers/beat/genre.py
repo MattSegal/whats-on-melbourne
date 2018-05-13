@@ -1,6 +1,7 @@
 import bs4
 import requests
 from celery.utils.log import get_task_logger
+from django.utils import timezone
 from requests.exceptions import RequestException
 
 from whatson.models import Event
@@ -31,14 +32,23 @@ def scrape_genre_page():
                 logger.error('Could not find title for genre %s', genre_name)
                 continue
 
-            try:
-                event = Event.objects.get(name=title)
-            except Event.DoesNotExist:
+            now = timezone.localtime()
+            today_naieve = timezone.datetime(year=now.year, month=now.month, day=now.day)
+            today = timezone.make_aware(today_naieve)
+            tomorrow = today + timezone.timedelta(days=1)
+
+            events = Event.objects.filter(
+                starts_at__gt=today,
+                starts_at__lte=tomorrow,
+                name=title,
+            )
+            if not events.exists():
                 logger.error('Could not find Event for title %s', title)
                 continue
 
-            event.event_type = genre_name
-            event.save()
+            for event in events:
+                event.event_type = genre_name
+                event.save()
 
 
 GENRES = {

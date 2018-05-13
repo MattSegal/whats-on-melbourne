@@ -52,3 +52,8 @@ so that I drive some traffic their way.
 * Improve mobile performance
 * Improve display of gig names on pins
 * Add other data sources
+
+
+to
+    - logs
+    - automated db backups
