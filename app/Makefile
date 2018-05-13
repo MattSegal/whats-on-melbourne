@@ -7,7 +7,7 @@ flower-local:
 	--port=5553 \
 	--basic_auth="${FLOWER_USER}:${FLOWER_PASSWORD}" \
 	--logfile /var/log/flower.log \
-	--loglevel info \
+	--loglevel info
 
 flower-prod:
 	echo "Starting remote syslog" && \
