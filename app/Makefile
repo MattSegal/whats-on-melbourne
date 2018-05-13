@@ -13,9 +13,9 @@ flower-prod:
 	echo "Starting remote syslog" && \
 	touch /var/log/flower.log && \
 	remote_syslog \
-	--hostname $PAPERTRAIL_HOSTNAME \
-	--dest-port $PAPERTRAIL_PORT \
-	--dest-host $PAPERTRAIL_URL \
+	--hostname "${PAPERTRAIL_HOSTNAME}" \
+	--dest-port "${PAPERTRAIL_PORT}" \
+	--dest-host "${PAPERTRAIL_URL}" \
 	--pid-file /var/run/remote_syslog.pid \
 	/var/log/flower.log && \
 	echo "Starting celery flower" && \
@@ -49,9 +49,9 @@ worker-prod:
 	echo "Starting remote syslog" && \
 	touch /var/log/celery.log && \
 	remote_syslog \
-	--hostname $PAPERTRAIL_HOSTNAME \
-	--dest-port $PAPERTRAIL_PORT \
-	--dest-host $PAPERTRAIL_URL \
+	--hostname "${PAPERTRAIL_HOSTNAME}" \
+	--dest-port "${PAPERTRAIL_PORT}" \
+	--dest-host "${PAPERTRAIL_URL}" \
 	--pid-file /var/run/remote_syslog.pid \
 	/var/log/celery.log && \
 	echo "Starting celery" && \
@@ -76,9 +76,9 @@ web-prod:
 	touch /var/log/gunicorn/access.log && \
 	touch /var/log/gunicorn/error.log && \
 	remote_syslog \
-	--hostname $PAPERTRAIL_HOSTNAME \
-	--dest-port $PAPERTRAIL_PORT \
-	--dest-host $PAPERTRAIL_URL \
+	--hostname "${PAPERTRAIL_HOSTNAME}" \
+	--dest-port "${PAPERTRAIL_PORT}" \
+	--dest-host "${PAPERTRAIL_URL}" \
 	--pid-file /var/run/remote_syslog.pid \
 	/var/log/gunicorn/access.log \
 	/var/log/gunicorn/error.log && \
