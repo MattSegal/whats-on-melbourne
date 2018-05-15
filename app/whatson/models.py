@@ -37,7 +37,8 @@ class Event(models.Model):
         ('EDM', 'Electronic Dance Music'),
         ('ROCK', 'Rock'),
         ('FOLK', 'Folk'),
-        ('COMEDY', 'Comedy')
+        ('COMEDY', 'Comedy'),
+        ('POKER', 'Poker'),
     )
 
     name = models.CharField(max_length=255)

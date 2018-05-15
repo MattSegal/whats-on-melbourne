@@ -69,9 +69,15 @@ def geocode_venues():
 
 @shared_task
 def geocode_venue(venue_pk):
-    logger.warning('Geocoding Venue[%s]', venue_pk)
     venue = Venue.objects.get(pk=venue_pk)
-    lat, lng, address = geocode_name(venue.name)
+
+    if venue.address:
+        name = '{}, {}'.format(venue.name, venue.address)
+    else:
+        name = '{}, {}'.format(venue.name, 'Melbourne')
+
+    logger.warning('Geocoding Venue[%s] with name %s', venue_pk, name)
+    lat, lng, address = geocode_name(name)
     venue.latitude = lat
     venue.longitude = lng
     venue.address = address
@@ -82,7 +88,7 @@ def geocode_venue(venue_pk):
 def geocode_name(name):
     url = 'https://maps.googleapis.com/maps/api/geocode/json'
     params = {
-        'address': '{}, Melbourne'.format(name),
+        'address': name,
         'key': settings.GEOCODING_API_KEY,
     }
     resp = requests.get(url, params=params)

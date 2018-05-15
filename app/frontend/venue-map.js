@@ -22,6 +22,7 @@ const genreMap = {
   ROCK: getMarkerUrl('blue', 'R'),
   FOLK: getMarkerUrl('paleblue', 'F'),
   COMEDY: getMarkerUrl('yellow', 'C'),
+  POKER: getMarkerUrl('brown', 'P'),
 }
 
 

@@ -1,7 +1,6 @@
 """
 Web scraper for Beat Magazine Gig Guide
 http://www.beat.com.au/gig-guide
-from scrapers.beat import scrape;scrape()
 """
 import bs4
 import requests

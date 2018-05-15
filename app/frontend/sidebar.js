@@ -48,7 +48,7 @@ export default class Sidebar extends Component {
               {activeVenue.website && (
                 <p className={ styles.website }>
                   <a
-                    href={`${activeVenue.website}?utm_source=whatsonmelb.fun`}
+                    href={activeVenue.website}
                     onClick={this.logVisitVenueWebsite(activeVenue)}
                   >
                     venue website

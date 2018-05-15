@@ -10,7 +10,7 @@ admin.site.register(Source)
 @admin.register(Event)
 class Event(admin.ModelAdmin):
     list_display = ['name', 'venue', 'starts_at']
-    list_filter = ['starts_at', 'venue']
+    list_filter = ['starts_at', 'event_type']
 
 
 @admin.register(Venue)
