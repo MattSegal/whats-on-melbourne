@@ -18,6 +18,9 @@ Data sources:
 
 Potential data sources:
 
+* https://whatson.melbourne.vic.gov.au/Whatson/ArtsandCulture/TheatreandShows/Pages/TheatreandShows.aspx?scope=Whatson&TMFromDate=2018-05-15&TMToDate=2018-05-15&start=0
+* http://malthousetheatre.com.au/whats-on
+* https://marrinergroup.com.au/shows
 * https://www.triplejunearthed.com/discover/gigs?featured=all&field_unearthed_genre_tid=all&term_node_tid_depth=3621&field_unearthed_campaign_tid=all
 * https://www.last.fm/events
 * https://pbsfm.org.au/gigs
