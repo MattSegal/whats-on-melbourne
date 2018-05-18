@@ -111,14 +111,24 @@ class Event extends Component {
         <div className="col">
           <div
             className={`${styles.event} ${styles.clickable}`}
-            onClick={setActiveEvent(event)}
+            onClick={event.showSearch ? setActiveEvent(event) : () => {}}
           >
             <h5>{ event.name }</h5>
             <GenrePill event={event} />
+            {activeVenue.detailsUrl && (
+                <p className={ styles.website }>
+                  <a
+                    href={activeVenue.website}
+                    onClick={this.logVisitVenueWebsite(activeVenue)}
+                  >
+                    venue website
+                  </a>
+                </p>
+            )}
             {artistEl}
             {startEl}
             {priceEl}
-            <div className={styles.cta}>Click for search</div>
+            {event.showSearch && <div className={styles.cta}>Click for search</div>}
           </div>
         </div>
       </div>
@@ -214,11 +224,13 @@ class ActiveEvent extends Component {
             {artistEl}
             {startEl}
             {priceEl}
-            <div className={styles.searchBox}>
-              {this.renderYoutubeSearch()}
-              {this.renderSoundCloudSearch()}
-              {this.renderBandCampSearch()}
-            </div>
+            {event.showSearch &&
+              <div className={styles.searchBox}>
+                {this.renderYoutubeSearch()}
+                {this.renderSoundCloudSearch()}
+                {this.renderBandCampSearch()}
+              </div>
+            }
             {this.context.activeEvent &&
               <p className={styles.closeEvent} onClick={unsetActiveEvent}>close</p>
             }

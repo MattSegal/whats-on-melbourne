@@ -17,6 +17,7 @@ requests
 
 # Scrapin'
 beautifulsoup4
+html5lib
 
 # Celery
 celery

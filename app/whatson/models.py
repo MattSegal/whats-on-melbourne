@@ -48,6 +48,8 @@ class Event(models.Model):
     price = models.IntegerField(null=True, blank=True)
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name='events')
     event_type = models.CharField(max_length=15, choices=EVENT_TYPES, null=True, blank=True)
+    details_url = models.URLField(max_length=255, blank=True, null=True)
+    show_search = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.slug:
