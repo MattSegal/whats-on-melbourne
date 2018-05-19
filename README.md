@@ -5,7 +5,7 @@ Live at https://whatsonmelb.fun/
 Resources:
 
 * https://tomchentw.github.io/react-google-maps/
-* https://developers.google.com/maps/documentation/javascript/reference/
+* https://developers.google.com/maps/documentation/javascript/reference/3.exp/
 * https://developers.google.com/maps/documentation/geocoding/start
 * https://github.com/graphql-python/graphene-django
 * https://www.apollographql.com/docs/react/essentials/get-started.html
@@ -55,6 +55,7 @@ so that I drive some traffic their way.
 ### Future Work
 
 * Dates in the future (tomorrow night, etc)
+* Try improve mobile map performance
 * Improve beat scraper
     - collect supporting acts
 * Improve SEO
@@ -65,3 +66,9 @@ so that I drive some traffic their way.
     - comedy
 * Improve infrastructure
     - automated db backups
+
+
+### Interesting but PITA features
+
+* plan your night
+* time filters

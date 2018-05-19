@@ -62,7 +62,6 @@ export default class VenueMap extends Component {
         key={idx}
         cursor="pointer"
         icon={this.getIcon(venue)}
-        label={zoom > 15 ? this.getLabel(venue) : ''}
         onClick={this.handleVenueClick(venue)}
         position={{lat: venue.latitude, lng: venue.longitude}}
       />
