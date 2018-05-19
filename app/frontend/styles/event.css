@@ -1,0 +1,82 @@
+.event {
+  background-color: #eee;
+  padding: 1rem;
+  margin-right: -15px;
+  margin-left: -15px;
+  position: relative;
+}
+.event + .event {
+  border-top: 1px solid #ccc;
+}
+.event h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+.detail {
+  font-size: 0.9rem;
+  margin: .4rem 0;
+}
+.detailLabel {
+  color: #333;
+  display: inline-block;
+  font-weight: bold;
+  width: 65px;
+}
+.searchBtn {
+  color: #666;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+.searchBtn:hover {
+  color: #000;
+  text-decoration: underline;
+}
+.searchBox {
+    margin: 1rem 0;
+}
+.searchBox div {
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.event .genre {
+  position: absolute;
+  right: 0.7rem;
+  bottom: 0.7rem;
+}
+
+.genre {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.genre.jazz {
+  background-color: #FF776B;
+}
+.genre.arts {
+  background-color: #C89BFF;
+}
+.genre.trivia {
+  background-color: #FDABFF;
+}
+.genre.hiphop {
+  background-color: #FD8D08;
+}
+.genre.edm {
+  background-color: #01BF00;
+}
+.genre.rock {
+  background-color: #6B98FF;
+}
+.genre.folk {
+  background-color: #BCE3FF;
+}
+.genre.comedy {
+  background-color: #FFED5C;
+}
+.genre.poker {
+  background-color: #cb9d7c;
+}

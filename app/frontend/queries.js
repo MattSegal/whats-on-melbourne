@@ -14,6 +14,8 @@ const venuesQuery = gql`
       price
       eventType
       startsAt
+      detailsUrl
+      showSearch
     }
   }
 }`

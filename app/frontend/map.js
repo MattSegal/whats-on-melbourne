@@ -39,6 +39,7 @@ module.exports = compose(
       fullscreenControl: false,
       streetViewControl: false,
       clickableIcons: false,
+      maxZoom: 17,
     }}
   >
     {cloneElement(props.children, { zoom: props.zoom })}

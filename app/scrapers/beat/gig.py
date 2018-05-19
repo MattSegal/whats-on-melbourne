@@ -75,6 +75,8 @@ def scrape_gig_page(gig_path):
     if 'trivia' in gig_data['name'].lower():
         gig_data['event_type'] = 'TRIVIA'
 
+
+    gig_data['show_search'] = True
     Event.objects.get_or_create(
         name=gig_data['name'],
         starts_at=gig_data['starts_at'],
