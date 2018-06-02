@@ -69,7 +69,10 @@ export default class Event extends Component {
         {this.renderStartTime()}
         {this.renderPrice()}
         {showSearch &&
-          <SearchBox event={event} logSearchClick={this.logSearchClick}/>
+          <SearchBox
+            event={this.props.event}
+            logSearchClick={this.logSearchClick}
+          />
         }
       </div>
     )
@@ -119,7 +122,7 @@ class SearchBox extends Component {
   render() {
     const { clicked } = this.state
     const { artist, name } = this.props.event
-    const searchTerm = event.artist || event.name
+    const searchTerm = artist || name
     const query = encodeURIComponent(searchTerm)
     if (clicked) {
       return (
