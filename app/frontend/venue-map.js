@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Query } from "react-apollo"
 import { Marker } from 'react-google-maps'
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer'
+import { connect } from 'react-redux'
 
 
 import styles from './styles/venue-map.css'
-import { venuesQuery } from './queries'
+import { actions } from 'state'
 
 
 // Colors blue brown darkgreen green orange paleblue pink purple red yellow
@@ -26,10 +26,16 @@ const genreMap = {
 }
 
 
-export default class VenueMap extends Component {
+class VenueMap extends Component {
 
-  static contextTypes = {
-    setActiveVenue: PropTypes.func,
+  static propTypes = {
+    venues: PropTypes.array,
+    fetchData: PropTypes.func,
+    setVenue: PropTypes.func,
+  }
+
+  componentDidMount() {
+    this.props.fetchData()
   }
 
   handleVenueClick = venue => e => {
@@ -37,7 +43,6 @@ export default class VenueMap extends Component {
   }
 
   getIcon = venue => {
-
     const eventTypes = venue.events.filter(e => e.eventType)
     const eventType = eventTypes.length > 0 ? eventTypes.slice(-1)[0].eventType : 'UNKNOWN'
     return {
@@ -56,24 +61,20 @@ export default class VenueMap extends Component {
       console.error(`Bad coordinates for ${venue.name}. lat, lng: ${venue.latitude}, ${venue.longitude}`)
       return null
     }
-    const { zoom } = this.props
+    const { zoom, setVenue } = this.props
     return (
       <Marker
         key={idx}
         cursor="pointer"
         icon={this.getIcon(venue)}
-        onClick={this.handleVenueClick(venue)}
+        onClick={() => setVenue(venue)}
         position={{lat: venue.latitude, lng: venue.longitude}}
       />
     )
   }
 
-
-  renderVenueQuery = result => {
-    const { loading, error, data } = result
-    if (error || loading) {
-      return null
-    }
+  render() {
+    const { venues } = this.props
     return (
       <MarkerClusterer
         averageCenter={true}
@@ -82,18 +83,18 @@ export default class VenueMap extends Component {
         maxZoom={12}
         minimumClusterSize={5}
       >
-      {data.venues.map(this.renderVenueMarker)}
+        {venues.map(this.renderVenueMarker)}
       </MarkerClusterer>
     )
   }
-
-  render() {
-    return (
-      <div>
-        <Query query={venuesQuery}>
-          {this.renderVenueQuery}
-        </Query>
-      </div>
-    )
-  }
 }
+
+
+const mapStateToProps = state => ({
+  venues: state.venues,
+})
+const mapDispatchToProps = dispatch => ({
+  fetchData: () => dispatch(actions.fetchData()),
+  setVenue: venue => dispatch(actions.setVenue(venue)),
+})
+module.exports = connect(mapStateToProps, mapDispatchToProps)(VenueMap)

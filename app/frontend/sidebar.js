@@ -1,59 +1,43 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import dayjs from 'dayjs'
+import { connect } from 'react-redux'
 
-import styles from './styles/sidebar.css'
+import styles from 'styles/sidebar.css'
+import genericStyles from 'styles/generic/sidebar.css'
+
 import Event from './event.js'
+import { logVisitVenueWebsite } from 'analytics'
+import { actions } from 'state'
 
-export default class Sidebar extends Component {
 
-  static contextTypes = {
+class Sidebar extends Component {
+
+  static propTypes = {
     activeVenue: PropTypes.object,
-    unsetActiveVenue: PropTypes.func,
-  }
-
-  handleCloseClick = e => {
-    e.preventDefault()
-    this.context.unsetActiveVenue()
-  }
-
-  logVisitVenueWebsite = venue => e => {
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'Venue',
-      eventAction: 'website',
-      eventLabel: venue.name,
-      eventValue: venue.website,
-    })
+    handleClose: PropTypes.func,
   }
 
   render() {
-    const { activeVenue } = this.context
+    const { activeVenue, handleClose } = this.props
     if (!activeVenue) {
       return null
     }
     return (
-      <div className={styles.sidebar}>
-        <div
-          className={styles.close}
-          onClick={this.handleCloseClick}
-        >&times;</div>
+      <div className={genericStyles.sidebar}>
+        <div className={genericStyles.close} onClick={handleClose} >&times;</div>
         <div className="container">
           <div className="row">
             <div className="col">
-              <h4 className={styles.title}>
-                { activeVenue.name }
-              </h4>
-              {activeVenue.website && (
-                <p className={ styles.website }>
-                  <a
-                    href={activeVenue.website}
-                    onClick={this.logVisitVenueWebsite(activeVenue)}
-                  >
-                    venue website
-                  </a>
-                </p>
-              )}
+              <div className={styles.pill}>
+                <h4 className={styles.title}>{ activeVenue.name }</h4>
+                {activeVenue.website && (
+                  <p className={ styles.link }>
+                    <a href={activeVenue.website} onClick={() => logVisitVenueWebsite(activeVenue)}>
+                      venue website
+                    </a>
+                  </p>
+                )}
+              </div>
             </div>
           </div>
           {activeVenue.events.map((event, idx) => <Event key={idx} event={event}/>)}
@@ -62,3 +46,12 @@ export default class Sidebar extends Component {
     )
   }
 }
+
+
+const mapStateToProps = state => ({
+  activeVenue: state.activeVenue,
+})
+const mapDispatchToProps = dispatch => ({
+  handleClose: () => dispatch(actions.clearVenue()),
+})
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Sidebar)

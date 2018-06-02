@@ -1,36 +1,26 @@
-.sidebar {
-    background-color: #ddd;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 300px;
-    z-index: 1;
-    padding: 1rem 0;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: calc(100vh - 44px);
-}
-.sidebar::-webkit-scrollbar {
- display: none;
+@value green, darkest_green from 'styles/generic/variables.css';
+
+
+.pill {
+  margin: 0 -5px 1.2rem -5px;
+  background: green;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: #fff;
 }
 
 .title {
-  color: #444;
-  margin: 1.6rem 1rem 1rem 0;
+  color: #fff;
+  margin: 0 1rem 0 0;
+  font-size: 1.2rem;
 }
 
-.website:hover {
-  cursor: pointer;
-  text-decoration: underline;
+.link, .link a {
+  color: darkest_green;
+  margin: 0
 }
 
-.close {
-  position: absolute;
+.link:hover {
   cursor: pointer;
-  font-size: 3rem;
-  line-height: 0.5;
-  top: 10px;
-  left: 265px;
-  z-index: 1;
+  text-decoration: none;
 }

@@ -32,7 +32,11 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
+    modules: [
+      '/app/frontend',
+      '/app/node_modules'
+    ]
   },
   plugins: [
     new BundleTracker({filename: 'webpack-stats.json'})

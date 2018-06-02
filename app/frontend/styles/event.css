@@ -1,31 +1,33 @@
+@value text_green from 'styles/generic/variables.css';
+
 .event {
-  background-color: #eee;
-  padding: 1rem;
-  margin-right: -15px;
-  margin-left: -15px;
+  composes: pill from "styles/sidebar.css";
   position: relative;
 }
-.event + .event {
-  border-top: 1px solid #ccc;
+
+.link {
+  composes: link from "styles/sidebar.css";
 }
-.event h5 {
-    font-size: 1.1rem;
-    margin-bottom: 0.8rem;
+
+.title {
+  margin: 0 1rem 0.3rem 0;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #fff;
 }
+
 .detail {
-  font-size: 0.9rem;
-  margin: .4rem 0;
+  font-size: 0.8rem;
+  margin: 0;
+  color: text_green;
 }
 .detailLabel {
-  color: #333;
   display: inline-block;
   font-weight: bold;
   width: 65px;
 }
 .searchBtn {
-  color: #666;
-  cursor: pointer;
-  text-transform: uppercase;
+  composes: link from "styles/sidebar.css";
   font-weight: bold;
   font-size: 0.8rem;
 }
@@ -41,42 +43,8 @@
   font-size: 0.8rem;
 }
 
-.event .genre {
+.genre {
   position: absolute;
   right: 0.7rem;
   bottom: 0.7rem;
-}
-
-.genre {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 3px;
-    font-weight: bold;
-}
-.genre.jazz {
-  background-color: #FF776B;
-}
-.genre.arts {
-  background-color: #C89BFF;
-}
-.genre.trivia {
-  background-color: #FDABFF;
-}
-.genre.hiphop {
-  background-color: #FD8D08;
-}
-.genre.edm {
-  background-color: #01BF00;
-}
-.genre.rock {
-  background-color: #6B98FF;
-}
-.genre.folk {
-  background-color: #BCE3FF;
-}
-.genre.comedy {
-  background-color: #FFED5C;
-}
-.genre.poker {
-  background-color: #cb9d7c;
 }

@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
 
-import styles from './styles/event.css'
+import styles from 'styles/event.css'
+
+import GenrePill from 'genre-pill'
+import { logSearchClick } from 'analytics'
+
 
 export default class Event extends Component {
 
@@ -57,11 +61,10 @@ export default class Event extends Component {
     }
     const { showSearch, name, detailsUrl } = this.props.event
     return (
-      <div className={`${styles.event} ${styles.clickable}`}>
-        <h5>{ name }</h5>
-        <GenrePill event={this.props.event} />
+      <div className={styles.event}>
+        <h5 className={styles.title}>{ name }</h5>
         {detailsUrl && (
-            <div className={ styles.website }>
+            <div className={styles.link}>
               <a href={detailsUrl}>more details</a>
             </div>
         )}
@@ -69,11 +72,11 @@ export default class Event extends Component {
         {this.renderStartTime()}
         {this.renderPrice()}
         {showSearch &&
-          <SearchBox
-            event={this.props.event}
-            logSearchClick={this.logSearchClick}
-          />
+          <SearchBox event={this.props.event}/>
         }
+        <div className={styles.genre}>
+          <GenrePill event={this.props.event} />
+        </div>
       </div>
     )
   }
@@ -98,20 +101,10 @@ class SearchBox extends Component {
     this.setState({clicked: true})
   }
 
-  logSearchClick = (site, term) => e => {
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'Search Event',
-      eventAction: 'click',
-      eventLabel: site,
-      eventValue: term,
-    })
-  }
-
   renderItem = (name, query, url) => (
-    <div>
+    <div className={styles.link}>
       <a
-        onClick={this.logSearchClick(name, query)}
+        onClick={() => logSearchClick(name, query)}
         href={url + query}
       >
         search {name}
@@ -135,19 +128,5 @@ class SearchBox extends Component {
     } else {
       return <div onClick={this.handleClick} className={styles.searchBtn}>search</div>
     }
-  }
-}
-
-
-class GenrePill extends Component {
-  render() {
-    const { event } = this.props
-    if (!event.eventType) {
-      return
-    }
-    const className = `${styles.genre} ${styles[event.eventType.toLowerCase()]}`
-    return (
-      <div className={className}>{event.eventType}</div>
-    )
   }
 }
