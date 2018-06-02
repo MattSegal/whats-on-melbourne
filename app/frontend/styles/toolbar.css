@@ -1,0 +1,13 @@
+@value dark from 'styles/generic/variables.css';
+
+.toolbar {
+    color: #fff;
+    background: dark;
+    padding: 0.3rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.option {
+
+}

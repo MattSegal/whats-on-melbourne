@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import GoogleMap from 'map'
 import VenueMap from 'venue-map'
 import Sidebar from 'sidebar'
+import Toolbar from 'toolbar'
 
 import {store} from 'state'
 
@@ -15,6 +16,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className='map-wrapper'>
+          <Toolbar/>
           <Sidebar/>
           <GoogleMap><VenueMap/></GoogleMap>
         </div>
