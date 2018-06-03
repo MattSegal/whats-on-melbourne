@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 
 import styles from 'styles/event.css'
 
-import GenrePill from 'genre-pill'
+import GenrePill from './genre-pill'
 import { logSearchClick } from 'analytics'
 
 
@@ -75,7 +75,7 @@ export default class Event extends Component {
           <SearchBox event={this.props.event}/>
         }
         <div className={styles.genre}>
-          <GenrePill event={this.props.event} />
+          <GenrePill eventType={this.props.eventType} />
         </div>
       </div>
     )

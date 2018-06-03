@@ -5,7 +5,10 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div id="app"></div>
+<div id="app">
+    <div class="toolbar-placeholder"></div>
+    <div class="loading">Loading map...</div>
+</div>
 {% endblock %}
 
 {% block extra_js %}
@@ -29,7 +32,7 @@
         "description": "{{ description }}",
         "name": "{{ title }}",
         "@type": "WebSite",
-        "@context": "http://schema.org",
+        "@context": "http://schema.org"
       }
       {# TODO: http://schema.org/Event #}
     ]

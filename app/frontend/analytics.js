@@ -22,6 +22,14 @@ const logVenueOpen = venue =>
     eventLabel: venue.name
   })
 
+const logToolbarOpen = selected =>
+   ga('send', {
+    hitType: 'event',
+    eventCategory: 'Toolbar',
+    eventAction: 'click',
+    eventLabel: selected
+  })
+
 const logSearchClick = (site, term) =>
   ga('send', {
     hitType: 'event',
@@ -37,4 +45,5 @@ module.exports = {
   logVenueClose,
   logVenueOpen,
   logSearchClick,
+  logToolbarOpen,
 }

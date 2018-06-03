@@ -5,7 +5,7 @@ import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerC
 import { connect } from 'react-redux'
 
 
-import styles from './styles/venue-map.css'
+import styles from 'styles/venue-map.css'
 import { actions } from 'state'
 
 
@@ -29,6 +29,7 @@ const genreMap = {
 class VenueMap extends Component {
 
   static propTypes = {
+    loading: PropTypes.bool,
     venues: PropTypes.array,
     fetchData: PropTypes.func,
     setVenue: PropTypes.func,
@@ -74,7 +75,10 @@ class VenueMap extends Component {
   }
 
   render() {
-    const { venues } = this.props
+    const { venues, loading } = this.props
+    if (loading) {
+      return <div className="loading">Loading venues...</div>
+    }
     return (
       <MarkerClusterer
         averageCenter={true}
@@ -91,7 +95,8 @@ class VenueMap extends Component {
 
 
 const mapStateToProps = state => ({
-  venues: state.venues,
+  venues: state.visibleVenues,
+  loading: state.loading,
 })
 const mapDispatchToProps = dispatch => ({
   fetchData: () => dispatch(actions.fetchData()),

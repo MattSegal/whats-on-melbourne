@@ -3,22 +3,25 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 
-import GoogleMap from 'map'
-import VenueMap from 'venue-map'
-import Sidebar from 'sidebar'
-import Toolbar from 'toolbar'
+import GoogleMap from 'components/google-map'
+import VenueMap from 'components/venue-map'
+import Sidebar from 'components/sidebar'
+import Toolbar from 'components/toolbar'
 
-import {store} from 'state'
+import { store } from 'state'
+import styles from 'styles/generic/wrapper.css'
 
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className='map-wrapper'>
-          <Toolbar/>
+        <div className={styles.wrapper}>
           <Sidebar/>
-          <GoogleMap><VenueMap/></GoogleMap>
+          <div><Toolbar/></div>
+          <div className={styles.wrapperChild}>
+            <GoogleMap><VenueMap/></GoogleMap>
+          </div>
         </div>
       </Provider>
     )

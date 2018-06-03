@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import styles from 'styles/sidebar.css'
-import genericStyles from 'styles/generic/sidebar.css'
 
 import Event from './event.js'
 import { logVisitVenueWebsite } from 'analytics'
@@ -20,11 +19,11 @@ class Sidebar extends Component {
   render() {
     const { activeVenue, handleClose } = this.props
     if (!activeVenue) {
-      return null
+      return <div className={styles.sidebar}></div>
     }
     return (
-      <div className={genericStyles.sidebar}>
-        <div className={genericStyles.close} onClick={handleClose} >&times;</div>
+      <div className={`${styles.sidebar} ${styles.open}`}>
+        <div className={styles.close} onClick={handleClose} >&times;</div>
         <div className="container">
           <div className="row">
             <div className="col">
