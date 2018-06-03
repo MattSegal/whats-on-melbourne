@@ -75,7 +75,7 @@ export default class Event extends Component {
           <SearchBox event={this.props.event}/>
         }
         <div className={styles.genre}>
-          <GenrePill eventType={this.props.eventType} />
+          <GenrePill genre={this.props.event.eventType} />
         </div>
       </div>
     )

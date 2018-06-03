@@ -7,19 +7,19 @@ import styles from 'styles/genre-pill.css'
 export default class GenrePill extends Component {
 
   static propTypes = {
-    eventType: PropTypes.string,
+    genre: PropTypes.string,
     disabled: PropTypes.bool,
   }
 
   render() {
-    const { eventType, disabled } = this.props
-    if (!eventType) {
+    const { genre, disabled } = this.props
+    if (!genre) {
       return null
     }
-    let style = disabled ? styles.disabled : styles[eventType.toLowerCase()]
+    let style = disabled ? styles.disabled : styles[genre.toLowerCase()]
     const className = `${styles.genre} ${style}`
     return (
-      <div className={className}>{eventType}</div>
+      <div className={className}>{genre}</div>
     )
   }
 }

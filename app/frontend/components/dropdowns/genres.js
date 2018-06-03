@@ -36,12 +36,14 @@ export default class GenreDropDown extends Component {
   render() {
     return (
       <div className={styles.dropdown}>
-        <div className={styles.genreList}>
-          {genres.map((g, idx) =>
-            <div key={idx} className={styles.genre} onClick={this.getAction(g)}>
-              <GenrePill disabled={this.isDisabled(g)} eventType={g}/>
-            </div>
-          )}
+        <div className="container">
+          <div className={styles.genreList}>
+            {genres.map((g, idx) =>
+              <div key={idx} className={styles.genre} onClick={this.getAction(g)}>
+                <GenrePill disabled={this.isDisabled(g)} genre={g}/>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     )

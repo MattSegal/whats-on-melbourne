@@ -30,10 +30,12 @@ class Toolbar extends Component {
     const action = toolbarOpen ? closeToolbar : openToolbar
     return (
      <div className={styles.toolbar}>
-        <div className={styles.options}>
-          <span
-            className={styles.option}
-            onClick={() => action(options.GENRES)}>Genres</span>
+        <div className="container">
+          <div className={styles.options}>
+            <span
+              className={styles.option}
+              onClick={() => action(options.GENRES)}>Genres</span>
+          </div>
         </div>
         <div className={`${styles.dropdown} ${toolbarOpen && styles.open}`}>
             {toolbarOpen && <DropDown/>}
