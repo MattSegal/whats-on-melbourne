@@ -1,5 +1,38 @@
+@value sidebar_width, header_height, toolbar_height from 'styles/generic/variables.css';
 @value green, darkest_green from 'styles/generic/variables.css';
 
+.sidebar {
+    background-color: #eeeeeed4;
+    position: absolute;
+    top: toolbar_height;
+    left: calc(0px - sidebar_width);
+    bottom: 0;
+    width: sidebar_width;
+    z-index: 1;
+    padding: 3rem 0 0 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100vh - header_height - toolbar_height);
+    transition: left .3s cubic-bezier(.57,.58,0,.96) .1s;
+}
+
+.open {
+    left: 0;
+}
+
+.sidebar::-webkit-scrollbar {
+ display: none;
+}
+
+.close {
+  position: absolute;
+  cursor: pointer;
+  font-size: 2rem;
+  line-height: 0.5;
+  top: 15px;
+  left: calc(sidebar_width - 35px);
+  z-index: 1;
+}
 
 .pill {
   margin: 0 -5px 1.2rem -5px;

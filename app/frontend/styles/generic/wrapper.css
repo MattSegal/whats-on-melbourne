@@ -1,0 +1,11 @@
+@value header_height from 'styles/generic/variables.css';
+
+.wrapper {
+    height: calc(100vh - header_height);
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapperChild {
+    flex: 1;
+}

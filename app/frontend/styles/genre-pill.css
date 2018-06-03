@@ -9,6 +9,9 @@
     color: darkest_green;
     border: 1px solid darkest_green;
 }
+.genre.disabled {
+  background-color: #ccc;
+}
 .genre.jazz {
   background-color: genre_jazz;
 }

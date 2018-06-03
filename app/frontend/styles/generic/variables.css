@@ -6,8 +6,8 @@
 @value white #fff;
 @value grey #eee;
 @value dark #333;
-@value dark_hover hsla(0,0%,39%,.15)
-@value black #1a1a1a
+@value dark_hover hsla(0, 0%, 39%, 0.67);
+@value black #1a1a1a;
 
 @value text_grey #8c8c8c;
 
@@ -23,3 +23,4 @@
 
 @value sidebar_width 300px;
 @value header_height 44px;
+@value toolbar_height 44px;
