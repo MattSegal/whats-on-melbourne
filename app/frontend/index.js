@@ -17,9 +17,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className={styles.wrapper}>
-          <Sidebar/>
           <div><Toolbar/></div>
           <div className={styles.wrapperChild}>
+            <Sidebar/>
             <GoogleMap><VenueMap/></GoogleMap>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { createLogger }  from 'redux-logger'
 
 import reducer from './reducer'
 import actions from './actions'
+import listener from './listener';
 
 const loggerMiddleware = createLogger()
 const middleware = applyMiddleware(thunkMiddleware, loggerMiddleware)
@@ -17,8 +18,9 @@ const initialState = {
   visibleVenues: [],
 }
 
+const store = createStore(reducer, initialState, middleware)
 
-module.exports = {
-  store: createStore(reducer, initialState, middleware),
-  actions,
-}
+// Initialize event listener
+listener(store.dispatch, store.getState)
+
+module.exports = { store, actions }

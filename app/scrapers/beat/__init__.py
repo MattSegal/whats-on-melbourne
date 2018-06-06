@@ -14,13 +14,13 @@ logger = get_task_logger(__name__)
 
 
 def scrape():
-    logger.warning('Scraping Beat Magazine')
+    logger.warning('[BEATMAG] Scraping Beat Magazine')
     url = 'http://www.beat.com.au/gig-guide'
     try:
         resp = requests.get(url)
         resp.raise_for_status()
     except RequestException:
-        logger.exception('Could not scrape Beat Magazine')
+        logger.exception('[BEATMAG] Could not scrape Beat Magazine')
         return
 
     soup = bs4.BeautifulSoup(resp.content.decode('utf-8'), 'html.parser')

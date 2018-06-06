@@ -85,7 +85,7 @@ class VenueMap extends Component {
         enableRetinaIcons={true}
         gridSize={60}
         maxZoom={12}
-        minimumClusterSize={5}
+        minimumClusterSize={10}
       >
         {venues.map(this.renderVenueMarker)}
       </MarkerClusterer>

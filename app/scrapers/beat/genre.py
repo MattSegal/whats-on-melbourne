@@ -15,7 +15,7 @@ def scrape_genre_page():
         resp = requests.get(url)
         resp.raise_for_status()
     except RequestException:
-        logger.exception('Could not scrape Beat Magazine genres')
+        logger.exception('[BEATMAG] Could not scrape Beat Magazine genres')
         return
     # from scrapers.beat.genre import scrape_genre_page as s;s()
     soup = bs4.BeautifulSoup(resp.content.decode('utf-8'), 'html.parser')
@@ -29,7 +29,7 @@ def scrape_genre_page():
             if title_el:
                 title = title_el.text
             if not title:
-                logger.error('Could not find title for genre %s', genre_name)
+                logger.error('[BEATMAG] Could not find title for genre %s', genre_name)
                 continue
 
             now = timezone.localtime()
@@ -43,7 +43,7 @@ def scrape_genre_page():
                 name=title,
             )
             if not events.exists():
-                logger.error('Could not find Event for title %s', title)
+                logger.error('[BEATMAG] Could not find Event for title %s', title)
                 continue
 
             for event in events:

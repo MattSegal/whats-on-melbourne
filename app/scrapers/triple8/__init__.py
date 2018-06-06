@@ -21,7 +21,7 @@ HEADERS = {
 
 
 def scrape():
-    logger.warning('Scraping 888 Poker')
+    logger.warning('[888] Scraping 888 Poker')
     url = 'http://www.888pl.com.au/Index.asp'
     params = {
         'Action': 'Setup',
@@ -41,13 +41,13 @@ def scrape():
         resp = requests.post(url, data=data, params=params, headers=HEADERS)
         resp.raise_for_status()
     except RequestException:
-        logger.exception('Could not scrape 888 Poker')
+        logger.exception('[888] Could not scrape 888 Poker')
         return
 
     soup = bs4.BeautifulSoup(resp.content.decode('utf-8'), 'html.parser')
     results_tab = soup.find(id='TabContent_1_1')
     if not results_tab:
-        logger.exception('No search results found for 888 Poker')
+        logger.exception('[888] No search results found for 888 Poker')
         return
 
     even_event_rows = list(results_tab.find_all('tr', {'class': 'EventsRow_Even'}))
@@ -102,13 +102,13 @@ def scrape():
     venue_lookup = {}
     for venue in venues:
         url = venue['url']
-        logger.warning('Scraping 888 poker venue: %s', url)
+        logger.warning('[888] Scraping 888 poker venue: %s', url)
 
         try:
             resp = requests.get(url, headers=HEADERS)
             resp.raise_for_status()
         except RequestException:
-            logger.exception('Could not scrape venue %s from 888 Poker', url)
+            logger.exception('[888] Could not scrape venue %s from 888 Poker', url)
             return
 
         soup = bs4.BeautifulSoup(resp.content.decode('utf-8'), 'html.parser')

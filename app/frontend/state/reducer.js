@@ -36,12 +36,10 @@ const reducers = {
   SET_VENUE: (state, action) => ({
     ...state,
     activeVenue: action.venue,
-    toolbarOpen: null,
   }),
   OPEN_TOOLBAR: (state, action) => ({
     ...state,
     toolbarOpen: action.selected,
-    activeVenue: null,
   }),
   CLOSE_TOOLBAR:(state, action) => ({
     ...state,

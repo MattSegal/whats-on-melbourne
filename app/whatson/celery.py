@@ -17,10 +17,10 @@ def setup_periodic_tasks(sender, **kwargs):
     app.conf.beat_schedule = {
         'run-scrapers': {
             'task': 'whatson.tasks.run_scrapers',
-            'schedule': HOUR,
+            'schedule': 3 * HOUR,
         },
         'geocode-venues': {
             'task': 'whatson.tasks.geocode_venues',
-            'schedule': HOUR - HOUR / 3,
+            'schedule': 3 * HOUR - HOUR / 3,
         },
     }

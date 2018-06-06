@@ -36,7 +36,7 @@ genres = [
 def scrape():
     base_url = 'https://whatson.melbourne.vic.gov.au'
     for genre in genres:
-        logger.warning('Scraping Whatson Melbourne %s', genre['type'])
+        logger.warning('[WHATSON] Scraping Whatson Melbourne %s', genre['type'])
         url = base_url + genre['path']
         now = timezone.now()
         today_str = timezone.datetime.strftime(now, '%Y-%m-%d')
@@ -49,7 +49,7 @@ def scrape():
             resp = requests.get(url, params=params, headers=HEADERS)
             resp.raise_for_status()
         except RequestException:
-            logger.exception('Could not scrape 888 Poker')
+            logger.exception('[WHATSON] Could not scrape 888 Poker')
             return
 
         soup = bs4.BeautifulSoup(resp.content.decode('utf-8'), 'html.parser')
@@ -57,7 +57,7 @@ def scrape():
         details = results.find_all('div', {'class': 'detail'})
 
         if not details:
-            logger.exception('No search results found for Melbourne Whatson %s', genre['type'])
+            logger.exception('[WHATSON] No search results found for Melbourne Whatson %s', genre['type'])
             return
 
         detail_urls = []
@@ -68,7 +68,7 @@ def scrape():
 
 
         for url in detail_urls:
-            logger.warning('Scraping Melbourne whatson event: %s', url)
+            logger.warning('[WHATSON] Scraping Melbourne whatson event: %s', url)
             venue_data = {}
             event_data = {}
             event_data['details_url'] = url
@@ -77,7 +77,7 @@ def scrape():
                 resp = requests.get(url, headers=HEADERS)
                 resp.raise_for_status()
             except RequestException:
-                logger.exception('Could not scrape event %s from Melbourne whatson', url)
+                logger.exception('[WHATSON] Could not scrape event %s from Melbourne whatson', url)
                 return
 
             soup = bs4.BeautifulSoup(resp.content.decode('utf-8'), 'html5lib')
