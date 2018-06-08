@@ -38,8 +38,8 @@ def scrape():
     for genre in genres:
         logger.warning('[WHATSON] Scraping Whatson Melbourne %s', genre['type'])
         url = base_url + genre['path']
-        now = timezone.now()
-        today_str = timezone.datetime.strftime(now, '%Y-%m-%d')
+        now = timezone.localtime()
+        today_str = now.strftime('%Y-%m-%d')
         params = {
             'scope': 'Whatson',
             'TMFromDate': today_str,

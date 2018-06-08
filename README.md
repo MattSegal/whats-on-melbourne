@@ -61,7 +61,9 @@ so that I drive some traffic their way.
 * Improve SEO
     - add event schema
     - add about page
+* add sources page
 * time filters
 * login + save events + my events screen
 * add list view
 * some sort of area select method?
+* remove graphql
