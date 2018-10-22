@@ -24,19 +24,31 @@ const filters = {
 const selections = {
   CLEAR_VENUE: (state, action) => ({
     ...state,
-    activeVenue: null
+    selected: {
+      ...state.selected,
+      venue: null,
+    }
   }),
   SET_VENUE: (state, action) => ({
     ...state,
-    activeVenue: action.venue,
+    selected: {
+      ...state.selected,
+      venue: action.venue,
+    }
   }),
   OPEN_TOOLBAR: (state, action) => ({
     ...state,
-    toolbarOpen: action.selected,
+    selected: {
+      ...state.selected,
+      toolbarOpen: true,
+    }
   }),
   CLOSE_TOOLBAR:(state, action) => ({
     ...state,
-    toolbarOpen: null
+    selected: {
+      ...state.selected,
+      toolbarOpen: false,
+    }
   }),
 }
 
