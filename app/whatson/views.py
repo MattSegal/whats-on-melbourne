@@ -3,8 +3,20 @@ from urllib.parse import urlencode
 
 from django.conf import settings
 from django.views.generic import TemplateView
+from rest_framework import viewsets
 
-logger = logging.getLogger(__name__)
+from .serializers import EventSerializer, VenueSerializer
+from .models import Event, Venue
+
+
+class EventViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = EventSerializer
+    queryset = Event.objects.all()
+
+
+class VenueViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = VenueSerializer
+    queryset = Venue.objects.all()
 
 
 class HomeView(TemplateView):

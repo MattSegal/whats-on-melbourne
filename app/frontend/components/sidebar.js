@@ -48,9 +48,9 @@ class Sidebar extends Component {
 
 
 const mapStateToProps = state => ({
-  activeVenue: state.activeVenue,
+  activeVenue: state.selected.venue,
 })
 const mapDispatchToProps = dispatch => ({
-  handleClose: () => dispatch(actions.clearVenue()),
+  handleClose: () => dispatch(actions.selections.venue.clear()),
 })
 module.exports = connect(mapStateToProps, mapDispatchToProps)(Sidebar)

@@ -49,10 +49,10 @@ class Toolbar extends Component {
 
 
 const mapStateToProps = state => ({
-  toolbarOpen: state.toolbarOpen,
+  toolbarOpen: state.selected.toolbarOpen,
 })
 const mapDispatchToProps = dispatch => ({
-  closeToolbar: () => dispatch(actions.closeToolbar()),
-  openToolbar: s => dispatch(actions.openToolbar(s)),
+  closeToolbar: () => dispatch(actions.selections.toolbar.close()),
+  openToolbar: s => dispatch(actions.selections.toolbar.open(s)),
 })
 module.exports = connect(mapStateToProps, mapDispatchToProps)(Toolbar)

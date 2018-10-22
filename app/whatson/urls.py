@@ -1,15 +1,17 @@
 from django.contrib import admin
 from django.views.generic import TemplateView
-from django.urls import path
+from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
-from graphene_django.views import GraphQLView
+from rest_framework import routers
 
 from . import views
 
+router = routers.DefaultRouter()
+router.register(r'event', views.EventViewSet, 'event')
+router.register(r'venue', views.VenueViewSet, 'venue')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # FIXME: https://github.com/graphql-python/graphene-django/issues/61
-    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path('api/', include(router.urls)),
     path('', views.HomeView.as_view(), name='home'),
 ]

@@ -4,20 +4,11 @@ import { createLogger }  from 'redux-logger'
 
 import reducer from './reducer'
 import actions from './actions'
-import listener from './listener';
+import listener from './listener'
+import initialState from './init'
 
 const loggerMiddleware = createLogger()
 const middleware = applyMiddleware(thunkMiddleware, loggerMiddleware)
-
-const initialState = {
-  activeVenue: null,
-  toolbarOpen: null,
-  loading: false,
-  filteredGenres: [],
-  venues: [],
-  visibleVenues: [],
-}
-
 const store = createStore(reducer, initialState, middleware)
 
 // Initialize event listener

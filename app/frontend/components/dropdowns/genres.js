@@ -56,7 +56,7 @@ const mapStateToProps = state => ({
   filteredGenres: state.filteredGenres,
 })
 const mapDispatchToProps = dispatch => ({
-  addGenreFilter: g => dispatch(actions.addGenreFilter(g)),
-  removeGenreFilter: g => dispatch(actions.removeGenreFilter(g)),
+  addGenreFilter: g => dispatch(actions.filters.add('GENRE', g)),
+  removeGenreFilter: g => dispatch(actions.filters.remove('GENRE', g)),
 })
 module.exports = connect(mapStateToProps, mapDispatchToProps)(GenreDropDown)

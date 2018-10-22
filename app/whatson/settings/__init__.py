@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django_extensions',
-    'graphene_django',
+    'rest_framework',
     'webpack_loader',
     'scrapers',
     'whatson',

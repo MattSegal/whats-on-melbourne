@@ -1,45 +1,49 @@
-import ApolloClient from 'apollo-boost';
-
 import { logVenueClose, logVenueOpen, logToolbarOpen } from 'analytics'
-import { venuesQuery } from './queries'
+import { fetchDataList } from './utils'
 
-const client = new ApolloClient({uri: '/graphql/'})
 
-// Actions
+// Actions affecting filters
+const filters = {
+  add: (type, value) => ({ type: 'ADD_FILTER', filterType: type, value }),
+  remove: (type, value) => ({ type: 'REMOVE_FILTER', filterType: type, value }),
+};
+
+
+const selections = {
+  venue: {
+    set: venue => {
+      logVenueOpen(venue)
+      return {type: 'SET_VENUE', venue: venue}
+    },
+    clear: venue => {
+      logVenueOpen(venue)
+      return {type: 'SET_VENUE', venue: venue}
+    }
+  },
+  toolbar: {
+    close: () =>
+      ({type: 'CLOSE_TOOLBAR'}),
+    open: selected => {
+      logToolbarOpen(selected)
+      return {type: 'OPEN_TOOLBAR', selected: selected}
+    }
+  }
+}
+
+
+const venue = {
+  fetchList: fetchDataList('venue')
+}
+
+
+const event = {
+  fetchList: fetchDataList('event'),
+}
+
+
 module.exports = {
-  addGenreFilter: genre => {
-    return {type: 'ADD_GENRE_FILTER', genre: genre}
-  },
-  removeGenreFilter: genre => {
-    return {type: 'REMOVE_GENRE_FILTER', genre: genre}
-  },
-  clearVenue: () => {
-    logVenueClose()
-    return {type: 'CLEAR_VENUE'}
-  },
-  setVenue: venue => {
-    logVenueOpen(venue)
-    return {type: 'SET_VENUE', venue: venue}
-  },
-  closeToolbar: () => {
-    return {type: 'CLOSE_TOOLBAR'}
-  },
-  openToolbar: selected => {
-    logToolbarOpen(selected)
-    return {type: 'OPEN_TOOLBAR', selected: selected}
-  },
-  fetchData: () => dispatch => {
-    dispatch({type: 'FETCH_DATA_REQUEST'})
-    client.query({query: venuesQuery })
-    .then(resp => {
-      const { loading, error, data } = resp
-      // TODO - handle errors more gracefully
-      if (error) {
-        console.error(resp)
-      } else {
-        dispatch({type: 'FETCH_DATA_RESPONSE', venues: data.venues })
-      }
-    })
-    .catch(e => console.error(e))
-  },
+  filters,
+  selections,
+  venue,
+  event,
 }

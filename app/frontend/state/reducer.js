@@ -1,34 +1,27 @@
-// Reducers0
-const reducers = {
-  ADD_GENRE_FILTER: (state, action) => {
-    const filteredGenres = [
-      ...state.filteredGenres,
-      action.genre,
-    ]
-    return {
-      ...state,
-      filteredGenres: filteredGenres,
-      visibleVenues: filterVenues(state.venues, filteredGenres),
-    }
-  },
-  REMOVE_GENRE_FILTER: (state, action) => {
-    const filteredGenres = state.filteredGenres.filter(g => g != action.genre)
-    return {
-      ...state,
-      filteredGenres: filteredGenres,
-      visibleVenues: filterVenues(state.venues, filteredGenres),
-    }
-  },
-  FETCH_DATA_REQUEST: (state, action) => ({
+const filters = {
+  ADD_FILTER: (state, action) => ({
     ...state,
-    loading: true
+    filters: {
+      ...state.filters,
+      // Add the filtered value if it's not present already
+      [action.filterType]: (state.filters[action.filterType].includes(action.value) ?
+        state.filters[action.filterType] :
+        [...state.filters[action.filterType], action.value]
+      ),
+    },
   }),
-  FETCH_DATA_RESPONSE: (state, action) => ({
+  REMOVE_FILTER: (state, action) => ({
     ...state,
-    venues: action.venues,
-    visibleVenues: filterVenues(action.venues, state.filteredGenres),
-    loading: false
+    filters: {
+      ...state.filters,
+      // Remove the filtered value
+      [action.filterType]: state.filters[action.filterType].filter(v => v !== action.value),
+    },
   }),
+};
+
+
+const selections = {
   CLEAR_VENUE: (state, action) => ({
     ...state,
     activeVenue: null
@@ -47,12 +40,78 @@ const reducers = {
   }),
 }
 
-const filterVenues = (venues, filteredGenres) => venues
-  .map(v => ({
-    ...v,
-    events: v.events.filter(e => !filteredGenres.includes(e.eventType))
-  }))
-  .filter(v => v.events.length > 0)
+
+const requests = {
+  // Upsert (update or insert) a data item based on id
+  // eg. To update/insert a campaign, then action.key = 'campaign')
+  UPSERT_ITEM: (state, action) => ({
+    ...state,
+    data: {
+      ...state.data,
+      [action.key]: {
+        ...state.data[action.key],
+        loading: action.loading || false,
+        lookup: { ...state.data[action.key].lookup, [action.item.id]: action.item },
+        list: isItemInList(action.item, state.data[action.key].list) ?
+          updateItemInList(action.item, state.data[action.key].list) :
+          addItemToList(action.item, state.data[action.key].list),
+      },
+    },
+  }),
+  // Mark a set of data items as "loading"
+  SET_LOADING: (state, action) => ({
+    ...state,
+    data: {
+      ...state.data,
+      [action.key]: {
+        ...state.data[action.key],
+        loading: true,
+      },
+    },
+  }),
+  UNSET_LOADING: (state, action) => ({
+    ...state,
+    data: {
+      ...state.data,
+      [action.key]: {
+        ...state.data[action.key],
+        loading: false,
+      },
+    },
+  }),
+  // Received a set of data items from the backend
+  RECEIVE_LIST: (state, action) => ({
+    ...state,
+    data: {
+      ...state.data,
+      [action.key]: {
+        isCached: true,
+        loading: false,
+        list: action.data,
+        lookup: action.data.reduce((obj, el) => { obj[el.id] = el; return obj; }, {}),
+      },
+    },
+  }),
+  RESET_CACHE: state => ({
+    ...state,
+    data: Object.entries(state.data)
+      .reduce((stateData, [key, data]) => ({
+        ...stateData,
+        [key]: {
+          ...data,
+          isCached: false,
+        },
+      }), {}),
+  }),
+}
+
+
+const reducers = {
+  ...filters,
+  ...selections,
+  ...requests,
+}
+
 
 module.exports =  (state, action) => {
   const func = reducers[action.type]

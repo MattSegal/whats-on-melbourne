@@ -28,15 +28,9 @@ const genreMap = {
 
 class VenueMap extends Component {
 
-  static propTypes = {
-    loading: PropTypes.bool,
-    venues: PropTypes.array,
-    fetchData: PropTypes.func,
-    setVenue: PropTypes.func,
-  }
-
   componentDidMount() {
-    this.props.fetchData()
+    this.props.fetchVenueList()
+    this.props.fetchEventList()
   }
 
   handleVenueClick = venue => e => {
@@ -75,10 +69,13 @@ class VenueMap extends Component {
   }
 
   render() {
-    const { venues, loading } = this.props
-    if (loading) {
+    const { venueData, eventData } = this.props
+    if (venueData.loading || eventData.loading) {
       return <div className="loading">Loading venues...</div>
     }
+    const venues = venueData.list.map(v =>
+      ({...v, events: eventData.list.filter(e => e.venue === v.id )})
+    )
     return (
       <MarkerClusterer
         averageCenter={true}
@@ -95,11 +92,12 @@ class VenueMap extends Component {
 
 
 const mapStateToProps = state => ({
-  venues: state.visibleVenues,
-  loading: state.loading,
+  venueData: state.data.venue,
+  eventData: state.data.event,
 })
 const mapDispatchToProps = dispatch => ({
-  fetchData: () => dispatch(actions.fetchData()),
-  setVenue: venue => dispatch(actions.setVenue(venue)),
+  fetchVenueList: () => dispatch(actions.venue.fetchList(true)),
+  fetchEventList: () => dispatch(actions.event.fetchList(true)),
+  setVenue: venue => dispatch(actions.selections.venue.set(venue)),
 })
 module.exports = connect(mapStateToProps, mapDispatchToProps)(VenueMap)
