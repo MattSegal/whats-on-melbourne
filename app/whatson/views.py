@@ -2,6 +2,7 @@ import logging
 from urllib.parse import urlencode
 
 from django.conf import settings
+from django.utils import timezone
 from django.views.generic import TemplateView
 from rest_framework import viewsets
 
@@ -11,7 +12,11 @@ from .models import Event, Venue
 
 class EventViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventSerializer
-    queryset = Event.objects.all()
+    queryset = (
+        Event.objects
+        .filter(starts_at__gte=timezone.now() - timezone.timedelta(hours=2))
+        .all()
+    )
 
 
 class VenueViewSet(viewsets.ReadOnlyModelViewSet):

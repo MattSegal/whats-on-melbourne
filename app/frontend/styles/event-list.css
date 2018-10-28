@@ -1,0 +1,11 @@
+.eventList {
+  padding-top: 1rem;
+  background-color: #eee;
+}
+
+
+.event {
+  background-color: #fff;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}

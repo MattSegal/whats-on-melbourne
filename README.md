@@ -54,8 +54,15 @@ so that I drive some traffic their way.
 
 ### Future Work
 
-* Add about / sources page
 * Add list view
+    * Search list
+    * venue search
+    * show suburb in list
+    * suburb search? close to me?
+* fix toolbar dropdown
+* use list view display to simplify map view
+    - make it easy to switch list <--> map
+* change genre filters to "filter for" rather than "filter out"
 * Add dates in the future (tomorrow night, etc)
 * time filters
 * Try improve mobile map performance

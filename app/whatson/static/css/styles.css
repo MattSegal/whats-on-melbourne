@@ -42,19 +42,21 @@ header h1 {
   top: 44px;
   left: 0;
   right: 0;
-  bottom: 0;
+  min-height: calc(100vh - 44px);
   background-color: #eee;
 }
 
 #app .loading {
   position: absolute;
+  left: 0;
   top: calc(50vh - 44px);
   font-size: 1.6rem;
   font-weight: bold;
   color: #666;
   transform: translateY(-50%);
-  width: 100%;
+  width: 100vw;
   text-align: center;
+
 }
 
 #app .toolbar-placeholder {

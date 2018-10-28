@@ -30,6 +30,7 @@
   "dependencies": {
     "camelize": "^1.0.0",
     "dayjs": "^1.5.16",
+    "moment": "^2.22.2",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

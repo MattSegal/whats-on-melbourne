@@ -36,6 +36,7 @@ module.exports = compose(
     onZoomChanged={props.onZoomChanged}
     defaultCenter={{ lat: -37.812292, lng: 144.962281 }}
     options={{
+      zoomControl: false,
       fullscreenControl: false,
       streetViewControl: false,
       clickableIcons: false,
