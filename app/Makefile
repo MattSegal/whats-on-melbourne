@@ -41,7 +41,7 @@ worker-local:
 	celery worker \
 	--broker redis://${CELERY_HOST}:6379 \
 	--app whatson \
-	--concurrency 10 \
+	--concurrency 1 \
 	--beat \
 	--loglevel info
 
@@ -58,7 +58,7 @@ worker-prod:
 	celery worker \
 	--broker redis://${CELERY_HOST}:6379 \
 	--app whatson \
-	--concurrency 10 \
+	--concurrency 2 \
 	--beat \
 	--logfile /var/log/celery.log \
 	--loglevel info

@@ -13,5 +13,7 @@ router.register(r'venue', views.VenueViewSet, 'venue')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('', views.HomeView.as_view(), name='home'),
+    path('', views.FrontendView.as_view(), name='home'),
+    path('about/', views.FrontendView.as_view(), name='about'),
+    path('list/', views.FrontendView.as_view(), name='list'),
 ]

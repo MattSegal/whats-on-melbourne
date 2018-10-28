@@ -16,12 +16,11 @@
     <header>
       <div class="container">
         <div class="row d-flex justify-content-between">
-          <div class="col"><h1>What's On Melbourne</h1></div>
-          <div class="thanks col col-md-4 col-lg-3">
-              <a id="beat-link" href="http://www.beat.com.au/gig-guide?utm_source=whatsonmelb.fun" target="_blank" rel="noopener noreferrer">
-                <h2>Powered by</h2>
-                <img height="20" src="{% static 'img/beat_logo.png' %}">
-              </a>
+          <div class="col">
+              <h1>WOM</h1>
+          </div>
+          <div class="col">
+            <div id="header-root">
           </div>
         </div>
       </div>
@@ -44,18 +43,6 @@
         const ga = console.log
       </script>
     {% endif %}
-    <script type="text/javascript">
-      const beatAnchor = document.getElementById('beat-link')
-      beatAnchor.onclick = (function (){
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Referral',
-          eventAction: 'website',
-          eventLabel: 'Beat Magazine',
-          eventValue: 'http://www.beat.com.au/gig-guide',
-        })
-      })
-    </script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

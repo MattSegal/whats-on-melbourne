@@ -1,27 +1,30 @@
 import ReactDOM from 'react-dom'
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
-
-import GoogleMap from 'components/google-map'
-import VenueMap from 'components/venue-map'
-import Sidebar from 'components/sidebar'
-import Toolbar from 'components/toolbar'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { store } from 'state'
-import styles from 'styles/generic/wrapper.css'
-
+import MapContainer from 'containers/map'
+import AboutContainer from 'containers/about'
+import ListContainer from 'containers/list'
+import HeaderMenu from 'components/header-menu'
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className={styles.wrapper}>
-          <div><Toolbar/></div>
-          <div className={styles.wrapperChild}>
-            <Sidebar/>
-            <GoogleMap><VenueMap/></GoogleMap>
-          </div>
+        <div>
+          <Router>
+            <div>
+              <HeaderMenu />
+              <Switch>
+                <Route exact path="/" component={MapContainer} />
+                <Route path="/list" component={ListContainer} />
+                <Route path="/about" component={AboutContainer} />
+                <Route component={() => <div><h1>Not Found</h1></div>} />
+              </Switch>
+            </div>
+          </Router>
         </div>
       </Provider>
     )

@@ -1,3 +1,4 @@
+
 // initial state for the app
 const dataDefault = { loading: true, isCached: false, lookup: {}, list: [] };
 
@@ -13,6 +14,6 @@ module.exports = {
   selected: {
     // Items selected by the user
     venue: null,
-    toolbarOpen: null,
+    toolbar: null,
   },
 };

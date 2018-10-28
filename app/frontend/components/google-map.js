@@ -39,6 +39,7 @@ module.exports = compose(
       fullscreenControl: false,
       streetViewControl: false,
       clickableIcons: false,
+      mapTypeControl: false,
       maxZoom: 17,
     }}
   >

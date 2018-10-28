@@ -3,7 +3,9 @@
 .toolbar {
     color: #fff;
     background: dark;
+    height: 44px;
 }
+
 
 .options {
     height: toolbar_height;

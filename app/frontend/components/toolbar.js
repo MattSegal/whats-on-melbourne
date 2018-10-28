@@ -1,55 +1,41 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import styles from 'styles/toolbar.css'
-
+import { TOOLBAR } from 'consts'
 import { actions } from 'state'
+import ToolbarWrapper from 'components/display/toolbar-wrapper'
 import GenreDropDown from './dropdowns/genres'
 
-const options = {
-  GENRES: 'GENRES',
-}
-
 const dropdowns = {
-  GENRES: GenreDropDown,
+  [TOOLBAR.GENRES]: GenreDropDown,
 }
 
 
 class Toolbar extends Component {
 
-  static propTypes = {
-    openToolbar: PropTypes.func,
-    closeToolbar: PropTypes.func,
-    toolbarOpen: PropTypes.string,
-  }
-
   render() {
-    const { openToolbar, closeToolbar, toolbarOpen } = this.props
-    const DropDown = dropdowns[toolbarOpen]
-    const action = toolbarOpen ? closeToolbar : openToolbar
+    const { openToolbar, closeToolbar, toolbarSelection } = this.props
+    const DropDown = dropdowns[toolbarSelection]
+    const action = toolbarSelection ? closeToolbar : openToolbar
     return (
-     <div className={styles.toolbar}>
-        <div className="container">
-          <div className={styles.options}>
-            <span
-              className={styles.option}
-              onClick={() => action(options.GENRES)}>Genres</span>
-          </div>
+     <ToolbarWrapper>
+        <div className={styles.options}>
+          <span
+            className={styles.option}
+            onClick={() => action(TOOLBAR.GENRES)}>Genres</span>
         </div>
-        <div className={`${styles.dropdown} ${toolbarOpen && styles.open}`}>
-            {toolbarOpen && <DropDown/>}
+        <div className={`${styles.dropdown} ${toolbarSelection && styles.open}`}>
+            {toolbarSelection && <DropDown/>}
         </div>
-      </div>
+      </ToolbarWrapper>
     )
   }
 }
 
 
-
-
 const mapStateToProps = state => ({
-  toolbarOpen: state.selected.toolbarOpen,
+  toolbarSelection: state.selected.toolbar,
 })
 const mapDispatchToProps = dispatch => ({
   closeToolbar: () => dispatch(actions.selections.toolbar.close()),

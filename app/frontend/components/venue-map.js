@@ -4,8 +4,9 @@ import { Marker } from 'react-google-maps'
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer'
 import { connect } from 'react-redux'
 
-
+import ToolbarWrapper from 'components/display/toolbar-wrapper'
 import styles from 'styles/venue-map.css'
+import { filterOutGenres } from 'utils'
 import { actions } from 'state'
 
 
@@ -27,11 +28,6 @@ const genreMap = {
 
 
 class VenueMap extends Component {
-
-  componentDidMount() {
-    this.props.fetchVenueList()
-    this.props.fetchEventList()
-  }
 
   handleVenueClick = venue => e => {
     this.context.setActiveVenue(venue)
@@ -59,7 +55,7 @@ class VenueMap extends Component {
     const { zoom, setVenue } = this.props
     return (
       <Marker
-        key={idx}
+        key={`${venue.name}-${venue.latitude}-${venue.longitude}`}
         cursor="pointer"
         icon={this.getIcon(venue)}
         onClick={() => setVenue(venue)}
@@ -69,13 +65,19 @@ class VenueMap extends Component {
   }
 
   render() {
-    const { venueData, eventData } = this.props
+    const { venueData, eventData, filters } = this.props
     if (venueData.loading || eventData.loading) {
-      return <div className="loading">Loading venues...</div>
+      return (
+        <div>
+          <ToolbarWrapper />
+          <div className="loading">Loading venues...</div>
+        </div>
+      )
     }
-    const venues = venueData.list.map(v =>
-      ({...v, events: eventData.list.filter(e => e.venue === v.id )})
-    )
+    const events = eventData.list.filter(filterOutGenres(filters))
+    const venues = venueData.list
+      .map(v => ({...v, events: events.filter(e => e.venue === v.id )}))
+      .filter(v => v.events.length > 0)
     return (
       <MarkerClusterer
         averageCenter={true}
@@ -94,10 +96,9 @@ class VenueMap extends Component {
 const mapStateToProps = state => ({
   venueData: state.data.venue,
   eventData: state.data.event,
+  filters: state.filters,
 })
 const mapDispatchToProps = dispatch => ({
-  fetchVenueList: () => dispatch(actions.venue.fetchList(true)),
-  fetchEventList: () => dispatch(actions.event.fetchList(true)),
   setVenue: venue => dispatch(actions.selections.venue.set(venue)),
 })
 module.exports = connect(mapStateToProps, mapDispatchToProps)(VenueMap)

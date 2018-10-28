@@ -19,7 +19,7 @@ class VenueViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Venue.objects.all()
 
 
-class HomeView(TemplateView):
+class FrontendView(TemplateView):
     template_name = 'home.html'
 
     def get_context_data(self, **kwargs):

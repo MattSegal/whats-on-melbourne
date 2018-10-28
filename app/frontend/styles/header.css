@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header > * + * {
+  margin-left: 1.5rem;
+}
+
+.header a {
+  color: #fff;
+}

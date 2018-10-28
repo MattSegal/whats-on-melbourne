@@ -40,14 +40,14 @@ const selections = {
     ...state,
     selected: {
       ...state.selected,
-      toolbarOpen: true,
+      toolbar: action.selected,
     }
   }),
   CLOSE_TOOLBAR:(state, action) => ({
     ...state,
     selected: {
       ...state.selected,
-      toolbarOpen: false,
+      toolbar: null,
     }
   }),
 }
