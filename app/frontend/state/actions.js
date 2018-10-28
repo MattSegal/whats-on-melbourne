@@ -15,9 +15,9 @@ const selections = {
       logVenueOpen(venue)
       return {type: 'SET_VENUE', venue: venue}
     },
-    clear: venue => {
-      logVenueOpen(venue)
-      return {type: 'SET_VENUE', venue: venue}
+    clear: () => {
+      logVenueClose()
+      return {type: 'SET_VENUE', venue: null}
     }
   },
   toolbar: {

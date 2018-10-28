@@ -9,11 +9,11 @@ const listener = (dispatch, getState) => {
       : e.keyCode == 27
     if (isEscape) {
       const state = getState()
-      if (state.activeVenue) {
-        dispatch(actions.clearVenue())
+      if (state.selected.venue) {
+        dispatch(actions.selections.venue.clear())
       }
-      if (state.toolbarOpen) {
-        dispatch(actions.closeToolbar())
+      if (state.selected.toolbarOpen) {
+        dispatch(actions.selections.toolbar.close())
       }
     }
   }

@@ -54,16 +54,15 @@ so that I drive some traffic their way.
 
 ### Future Work
 
-* Dates in the future (tomorrow night, etc)
+* Add about / sources page
+* Add list view
+* Add dates in the future (tomorrow night, etc)
+* time filters
 * Try improve mobile map performance
-* Improve beat scraper
-    - collect supporting acts
 * Improve SEO
+    - server side rendering
     - add event schema
     - add about page
-* add sources page
-* time filters
+* Improve beat scraper
+    - collect supporting acts
 * login + save events + my events screen
-* add list view
-* some sort of area select method?
-* remove graphql
