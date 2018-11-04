@@ -41,7 +41,7 @@ worker-local:
 	celery worker \
 	--broker redis://${CELERY_HOST}:6379 \
 	--app whatson \
-	--concurrency 10 \
+	--concurrency 2 \
 	--beat \
 	--loglevel info
 
@@ -58,7 +58,7 @@ worker-prod:
 	celery worker \
 	--broker redis://${CELERY_HOST}:6379 \
 	--app whatson \
-	--concurrency 10 \
+	--concurrency 2 \
 	--beat \
 	--logfile /var/log/celery.log \
 	--loglevel info
@@ -87,7 +87,7 @@ web-prod:
 	echo "Starting gunicorn" && \
 	gunicorn whatson.wsgi:application \
 	--name whatson \
-	--workers 3 \
+	--workers 2 \
 	--bind 0.0.0.0:8003 \
 	--capture-output \
 	--log-level info \
