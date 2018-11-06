@@ -5,7 +5,30 @@
 
 
 .event {
+  position: relative;
   background-color: #fff;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border-width: 1px 0 0 1px ;
+  border-style: solid;
+  box-shadow: 1px 1px 3px #555;
+}
+
+.event .genre {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.event .title {
+  font-size: 0.9rem;
+}
+.event .subtitle {
+  font-size: 0.7rem;
+}
+
+.event .openBtn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

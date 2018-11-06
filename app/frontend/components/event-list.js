@@ -8,14 +8,62 @@ import { actions } from 'state'
 import styles from 'styles/event-list.css'
 
 
-const Event = ({name, startsAt, venue, eventType}) => (
-  <div className={styles.event}>
-    <div>{name}</div>
-    <div>at {venue.name}</div>
-    <div>starts {moment(startsAt).format('H:mma')} - {moment(startsAt).fromNow()}</div>
-    <GenrePill genre={eventType} />
-  </div>
-)
+const formatTitle = title => {
+  let items
+  if (title.length < 35) return <span>{ title }</span>
+  if (title.includes('–')) {
+    items = title.split('–').map(s => s.trim())
+  } else if (title.includes('(')) {
+    items = title.split('(').map(s => s.trim().replace(')', ''))
+  } else {
+    const words = title.split(' ')
+    items = [
+      words.slice(0, -2).join(' '),
+      words.slice(-2).join(' '),
+    ]
+  }
+  return (
+    <span>
+      {items.slice(0, -1).join(' ')}
+      <br />
+      {items.slice(-1).join(' ')}
+    </span>
+  )
+}
+
+class Event extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = { isOpen: false }
+  }
+
+  toggleOpen = () =>
+    this.setState({ isOpen: !this.state.isOpen })
+
+  render() {
+    const { isOpen } = this.state
+    const { name, startsAt, venue, eventType } = this.props
+    return (
+      <div
+        className={styles.event}
+        style={{ borderColor: GenrePill.getColor(eventType) }}
+        >
+        <div className={styles.title}>{formatTitle(name)}</div>
+        <div className={styles.subtitle}>{moment(startsAt).format('h:mma')} at {venue.name}</div>
+        <div className={styles.genre}>
+          <GenrePill genre={eventType} />
+        </div>
+        {!isOpen && (
+          <div onClick={this.toggleOpen} className={styles.openBtn}>more</div>
+        )}
+        {isOpen && (
+          <div onClick={this.toggleOpen} className={styles.openBtn}>open!</div>
+        )}
+      </div>
+    );
+  }
+}
 
 class EventList extends Component {
 

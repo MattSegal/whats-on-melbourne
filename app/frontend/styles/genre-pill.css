@@ -1,41 +1,10 @@
-@value genre_jazz, genre_arts, genre_trivia, genre_hiphop, genre_edm, genre_rock, genre_folk, genre_comedy, genre_poker from 'styles/generic/variables.css';
 @value darkest_green from 'styles/generic/variables.css';
 
 .genre {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 3px;
-    font-weight: bold;
+    padding: 2px 6px;
+    font-size: 0.7rem;
     color: darkest_green;
-    border: 1px solid darkest_green;
 }
 .genre.disabled {
   background-color: #ccc;
-}
-.genre.jazz {
-  background-color: genre_jazz;
-}
-.genre.arts {
-  background-color: genre_arts;
-}
-.genre.trivia {
-  background-color: genre_trivia;
-}
-.genre.hiphop {
-  background-color: genre_hiphop;
-}
-.genre.edm {
-  background-color: genre_edm;
-}
-.genre.rock {
-  background-color: genre_rock;
-}
-.genre.folk {
-  background-color: genre_folk;
-}
-.genre.comedy {
-  background-color: genre_comedy;
-}
-.genre.poker {
-  background-color: genre_poker;
 }
