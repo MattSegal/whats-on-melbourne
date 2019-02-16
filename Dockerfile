@@ -21,7 +21,8 @@ RUN \
        	postgresql-client \
        	postgresql-common \
         iputils-ping \
-        curl
+        curl \
+        git
 
 RUN \
   echo "Installing remote_syslog2 for Papertrail" && \
