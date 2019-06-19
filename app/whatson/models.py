@@ -30,15 +30,15 @@ class Venue(models.Model):
 
 class Event(models.Model):
     EVENT_TYPES = (
-        ('TRIVIA', 'Trivia'),
-        ('JAZZ', 'Jazz'),
-        ('ARTS', 'Arts and Theatre'),
-        ('HIPHOP', 'Hip-Hop'),
-        ('EDM', 'Electronic Dance Music'),
-        ('ROCK', 'Rock'),
-        ('FOLK', 'Folk'),
-        ('COMEDY', 'Comedy'),
-        ('POKER', 'Poker'),
+        ("TRIVIA", "Trivia"),
+        ("JAZZ", "Jazz"),
+        ("ARTS", "Arts and Theatre"),
+        ("HIPHOP", "Hip-Hop"),
+        ("EDM", "Electronic Dance Music"),
+        ("ROCK", "Rock"),
+        ("FOLK", "Folk"),
+        ("COMEDY", "Comedy"),
+        ("POKER", "Poker"),
     )
 
     name = models.CharField(max_length=255)
@@ -46,8 +46,10 @@ class Event(models.Model):
     starts_at = models.DateTimeField()
     artist = models.CharField(max_length=255)
     price = models.IntegerField(null=True, blank=True)
-    venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name='events')
-    event_type = models.CharField(max_length=15, choices=EVENT_TYPES, null=True, blank=True)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name="events")
+    event_type = models.CharField(
+        max_length=15, choices=EVENT_TYPES, null=True, blank=True
+    )
     details_url = models.URLField(max_length=255, blank=True, null=True)
     show_search = models.BooleanField(default=False)
 

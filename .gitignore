@@ -1,14 +1,19 @@
 # Docker
 .env
 
+# VS Code
+.vscode/
+
 # Python
 *.pyc
+env/
 
 # NodeJS / NPM / Webpack
 node_modules/
 webpack-stats.json
 npm-debug.log.*
 build/
+dist/
 
 # Celery
 celerybeat-schedule.db

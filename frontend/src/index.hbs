@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>What's On Melbourne</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Discover music and events that are on tonight in Melbourne" />
+  <meta name="google-site-verification" content="4fBjj8M4fwkOIKqdZlz5oooxZQLI6WYaaZOPLE5mtxY" />
+  <link rel="icon" type="image/png" sizes="128x128" href="/build/static/img/favicon.png">
+  <link rel="stylesheet" type="text/css" href="/build/main{{#if CSS_BUILDHASH}}-{{CSS_BUILDHASH}}{{/if}}.css">
+</head>
+
+<body>
+  <div id="app"></div>
+  {{#if GA_ID}}
+  <script async src="https://www.googletagmanager.com/gtag/js?id='{{ GA_ID }}"></script>
+  <script type="text/javascript">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ GA_ID }}'});
+  </script>
+  {{/if}}
+  <script src="/build/main{{#if JS_BUILDHASH}}-{{ JS_BUILDHASH }}{{/if}}.js"></script>
+</body>
+
+</html>

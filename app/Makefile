@@ -63,9 +63,6 @@ worker-prod:
 	--logfile /var/log/celery.log \
 	--loglevel info
 
-webpack:
-	npm run dev
-
 web-local:
 	./manage.py runserver 0.0.0.0:8000
 
@@ -93,3 +90,31 @@ web-prod:
 	--log-level info \
 	--error-logfile /var/log/gunicorn/error.log \
 	--access-logfile /var/log/gunicorn/access.log
+
+# Lint Python code
+lint:
+	flake8 \
+		--max-line-length=90 \
+		--exclude='*migrations*' \
+		.
+	isort \
+		-l 90 \
+		--diff \
+		--check-only \
+		--skip migrations --skip /app/frontend
+
+
+# Auto-format Python code
+format:
+	black \
+		--line-length 90 \
+		--exclude "migrations/" \
+		--skip-string-normalization \
+		.
+	isort \
+		-l 90 \
+		--skip migrations --skip /app/frontend \
+		--apply
+
+test:
+	pytest -s -vv --reuse-db

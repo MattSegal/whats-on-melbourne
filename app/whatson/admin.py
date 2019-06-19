@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.messages import constants as messages
 
-from .models import Venue, Event, Source
+from .models import Event, Source, Venue
 from .tasks import geocode_venue, run_scraper
 
 
@@ -17,11 +17,7 @@ class VenueAdmin(admin.ModelAdmin):
 
     def geocode(self, request, queryset):
         for venue in queryset:
-            is_not_encoded = not (
-                venue.address and
-                venue.latitude and
-                venue.longitude
-            )
+            is_not_encoded = not (venue.address and venue.latitude and venue.longitude)
             if is_not_encoded:
                 geocode_venue.delay(venue.pk)
 

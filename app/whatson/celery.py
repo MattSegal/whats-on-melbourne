@@ -1,4 +1,5 @@
 import os
+
 from celery import Celery
 from celery.schedules import crontab
 from django.conf import settings
@@ -15,10 +16,7 @@ app.autodiscover_tasks()
 @app.on_after_finalize.connect
 def setup_periodic_tasks(sender, **kwargs):
     app.conf.beat_schedule = {
-        'run-scrapers': {
-            'task': 'whatson.tasks.run_scrapers',
-            'schedule': 3 * HOUR,
-        },
+        'run-scrapers': {'task': 'whatson.tasks.run_scrapers', 'schedule': 3 * HOUR},
         'geocode-venues': {
             'task': 'whatson.tasks.geocode_venues',
             'schedule': 3 * HOUR - HOUR / 3,

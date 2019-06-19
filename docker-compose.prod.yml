@@ -1,88 +1,87 @@
-version: '3'
+version: "3"
 
 services:
-    redis:
-        image: redis
-    worker:
-        image: localhost:5000/whatson
-        command: make worker-prod
-        environment:
-            - DJANGO_SETTINGS_MODULE=whatson.settings.prod
-            - CELERY_HOST=redis
-            - REDIS_HOST=redis
+  redis:
+    image: redis
+  worker:
+    image: localhost:5000/whatson
+    command: make worker-prod
+    environment:
+      - DJANGO_SETTINGS_MODULE=whatson.settings.prod
+      - CELERY_HOST=redis
+      - REDIS_HOST=redis
 
-            # Postgres
-            - PGDATABASE=whatson
-            - PGUSER=$WHATSON_DB_USER
-            - PGPASSWORD=$WHATSON_DB_PASSWORD
-            - PGHOST=167.99.78.141  # Hardcode PHOST IP for now
-            - PGPORT=5432
+      # Postgres
+      - PGDATABASE=whatson
+      - PGUSER=$WHATSON_DB_USER
+      - PGPASSWORD=$WHATSON_DB_PASSWORD
+      - PGHOST=167.99.78.141 # Hardcode PHOST IP for now
+      - PGPORT=5432
 
-            # Papertrail
-            - PAPERTRAIL_HOSTNAME=$WHATSON_PAPERTRAIL_HOSTNAME
-            - PAPERTRAIL_URL=$WHATSON_PAPERTRAIL_URL
-            - PAPERTRAIL_PORT=$WHATSON_PAPERTRAIL_PORT
+      # Papertrail
+      - PAPERTRAIL_HOSTNAME=$WHATSON_PAPERTRAIL_HOSTNAME
+      - PAPERTRAIL_URL=$WHATSON_PAPERTRAIL_URL
+      - PAPERTRAIL_PORT=$WHATSON_PAPERTRAIL_PORT
 
-            - RAVEN_DSN=$WHATSON_RAVEN_DSN
-            - GEOCODING_API_KEY=$GEOCODING_API_KEY
+      - RAVEN_DSN=$WHATSON_RAVEN_DSN
+      - GEOCODING_API_KEY=$GEOCODING_API_KEY
 
-            # Pass-through
-            - DJANGO_SECRET_KEY
+      # Pass-through
+      - DJANGO_SECRET_KEY
 
-    flower:
-        image: localhost:5000/whatson
-        command: make flower-prod
-        ports:
-            - 5553:5553
-        environment:
-            - DJANGO_SETTINGS_MODULE=whatson.settings.prod
-            - CELERY_HOST=redis
-            - REDIS_HOST=redis
+  flower:
+    image: localhost:5000/whatson
+    command: make flower-prod
+    ports:
+      - 5553:5553
+    environment:
+      - DJANGO_SETTINGS_MODULE=whatson.settings.prod
+      - CELERY_HOST=redis
+      - REDIS_HOST=redis
 
-            # Postgres
-            - PGDATABASE=whatson
-            - PGUSER=$WHATSON_DB_USER
-            - PGPASSWORD=$WHATSON_DB_PASSWORD
-            - PGHOST=167.99.78.141  # Hardcode PHOST IP for now
-            - PGPORT=5432
-            - RAVEN_DSN=$WHATSON_RAVEN_DSN
-            - GEOCODING_API_KEY=$GEOCODING_API_KEY
+      # Postgres
+      - PGDATABASE=whatson
+      - PGUSER=$WHATSON_DB_USER
+      - PGPASSWORD=$WHATSON_DB_PASSWORD
+      - PGHOST=167.99.78.141 # Hardcode PHOST IP for now
+      - PGPORT=5432
+      - RAVEN_DSN=$WHATSON_RAVEN_DSN
+      - GEOCODING_API_KEY=$GEOCODING_API_KEY
 
-            # Papertrail
-            - PAPERTRAIL_HOSTNAME=$WHATSON_PAPERTRAIL_HOSTNAME
-            - PAPERTRAIL_URL=$WHATSON_PAPERTRAIL_URL
-            - PAPERTRAIL_PORT=$WHATSON_PAPERTRAIL_PORT
+      # Papertrail
+      - PAPERTRAIL_HOSTNAME=$WHATSON_PAPERTRAIL_HOSTNAME
+      - PAPERTRAIL_URL=$WHATSON_PAPERTRAIL_URL
+      - PAPERTRAIL_PORT=$WHATSON_PAPERTRAIL_PORT
 
-            # Pass-through
-            - DJANGO_SECRET_KEY
-            - FLOWER_USER
-            - FLOWER_PASSWORD
+      # Pass-through
+      - DJANGO_SECRET_KEY
+      - FLOWER_USER
+      - FLOWER_PASSWORD
 
-    web:
-        image: localhost:5000/whatson
-        command: make web-prod
-        ports:
-            - 8003:8003
-        environment:
-            - DJANGO_SETTINGS_MODULE=whatson.settings.prod
-            - CELERY_HOST=redis
-            - REDIS_HOST=redis
+  web:
+    image: localhost:5000/whatson
+    command: make web-prod
+    ports:
+      - 8003:8003
+    environment:
+      - DJANGO_SETTINGS_MODULE=whatson.settings.prod
+      - CELERY_HOST=redis
+      - REDIS_HOST=redis
 
-            # Postgres
-            - PGDATABASE=whatson
-            - PGUSER=$WHATSON_DB_USER
-            - PGPASSWORD=$WHATSON_DB_PASSWORD
-            - PGHOST=167.99.78.141  # Hack this in for now
-            - PGPORT=5432
+      # Postgres
+      - PGDATABASE=whatson
+      - PGUSER=$WHATSON_DB_USER
+      - PGPASSWORD=$WHATSON_DB_PASSWORD
+      - PGHOST=167.99.78.141 # Hack this in for now
+      - PGPORT=5432
 
-            # Papertrail
-            - PAPERTRAIL_HOSTNAME=$WHATSON_PAPERTRAIL_HOSTNAME
-            - PAPERTRAIL_URL=$WHATSON_PAPERTRAIL_URL
-            - PAPERTRAIL_PORT=$WHATSON_PAPERTRAIL_PORT
+      # Papertrail
+      - PAPERTRAIL_HOSTNAME=$WHATSON_PAPERTRAIL_HOSTNAME
+      - PAPERTRAIL_URL=$WHATSON_PAPERTRAIL_URL
+      - PAPERTRAIL_PORT=$WHATSON_PAPERTRAIL_PORT
 
-            - RAVEN_DSN=$WHATSON_RAVEN_DSN
-            - GEOCODING_API_KEY=$GEOCODING_API_KEY
+      - RAVEN_DSN=$WHATSON_RAVEN_DSN
+      - GEOCODING_API_KEY=$GEOCODING_API_KEY
 
-            # Pass-through
-            - DJANGO_SECRET_KEY
-
+      # Pass-through
+      - DJANGO_SECRET_KEY

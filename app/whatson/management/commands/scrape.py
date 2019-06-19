@@ -2,10 +2,12 @@ import importlib
 
 from django.core.management.base import BaseCommand
 
+
 class Command(BaseCommand):
     """
     Scrapes a given site
     """
+
     help = __doc__
 
     def add_arguments(self, parser):

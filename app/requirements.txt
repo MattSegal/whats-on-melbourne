@@ -1,21 +1,21 @@
 # Backend
 django
-psycopg2-binary
+djangorestframework
+django-cors-headers
+
+# Infra
+raven
 gunicorn
 ipython
-raven
+psycopg2-binary
 redis
 django-extensions
 
 # Frontend
 whitenoise
-graphene-django
-django-webpack-loader
-
-# API
-requests
 
 # Scrapin'
+requests
 beautifulsoup4
 html5lib
 
@@ -26,3 +26,16 @@ flower
 
 # Development
 watchdog
+
+# Linting
+flake8
+isort
+black
+
+# Testing
+faker
+pytest-django
+pytest-sugar
+fakeredis
+responses
+freezegun
