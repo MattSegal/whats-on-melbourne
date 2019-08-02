@@ -60,8 +60,9 @@ def scrape():
         articles = soup.find_all("article", {"class": "article-card"})
         for article in articles:
             anchor = article.find("a")
-            gig_url = anchor.attrs["href"]
-            gig_urls.append(gig_url)
+            if anchor:
+                gig_url = anchor.attrs["href"]
+                gig_urls.append(gig_url)
 
     for gig_url in gig_urls:
         try:
