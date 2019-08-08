@@ -117,7 +117,8 @@ def parse_gig_data(extracted_data):
     """
     parsed_data = {}
 
-    # Price: $31.40, FREE
+    # Price: $31.40, FREE, 10.00 - 12.00
+    # FIXME: Cover "10.00 - 12.00" case by picking highest number
     price_text = extracted_data.get("price", "FREE")
     if price_text == "FREE":
         parsed_data["price"] = None
