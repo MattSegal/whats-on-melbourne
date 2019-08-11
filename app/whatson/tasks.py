@@ -18,7 +18,7 @@ def run_scrapers():
     logger.warning("Running scrapers")
     now = timezone.localtime()
     start_today = now.replace(hour=0, minute=0, second=0, microsecond=0)
-    sources = Source.objects.exclude(scraped_at__gte=start_today).all()
+    sources = Source.objects.all()
     for source in sources:
         redis = Redis(host=settings.REDIS_HOST)
         cache_key = "scrape-{}".format(source.name)
