@@ -15,26 +15,26 @@ worker:
 
 # Run Django with debugging enabled
 debug:
-	docker-compose run --service-ports web
+	docker-compose run --rm --service-ports web
 
 # Get a bash shell in the docker container
 bash:
-	docker-compose run web bash
+	docker-compose run --rm web bash
 
 # Get a Django shell_plus shell in the docker container
 shell:
-	docker-compose run web ./manage.py shell_plus
+	docker-compose run --rm web ./manage.py shell_plus
 
 # Get a Postgres shell in the docker container
 psql:
-	docker-compose run test psql
+	docker-compose run --rm test psql
 
 # Lint frontend and Python code
 lint:
-	docker-compose run test make lint
+	docker-compose run --rm test make lint
 
 format:
-	docker-compose run test make format
+	docker-compose run --rm test make format
 
 test:
-	docker-compose run test make test
+	docker-compose run --rm test make test
